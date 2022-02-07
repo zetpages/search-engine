@@ -145,21 +145,76 @@
                     </section>
 
                     <section id="tab4-content" role="tabpanel" aria-labelledby="tab4" tabindex="0" aria-hidden="true">
-                        <h3>Tab Four</h3>
-
-                        <p>Aenean id purus et lectus scelerisque bibendum. Nunc laoreet laoreet sapien, ut sollicitudin
-                            orci
-                            tincidunt
-                            nec. Duis et mi ultrices, iaculis dolor luctus, dignissim sapien. Ut in porttitor augue.
-                            Aenean a libero
-                            vel
-                            ligula tempor consectetur. Pellentesque quam tortor, interdum vel posuere at, sollicitudin
-                            et arcu.
-                            Quisque
-                            et semper nisl. Curabitur vitae accumsan eros. Mauris hendrerit sodales purus vel maximus.
-                            Donec
-                            interdum
-                            velit arcu, eu condimentum odio pharetra id.</p>
+                        <div class="display__grid">
+                            <div class="grid__item grid__item-1">
+                                <div class="select__rooms">
+                                    <p>Rooms</p>
+                                    <button type="button" class="room" id="room" data-number="1">1</button>
+                                    <button type="button" class="room" id="room" data-number="2">2</button>
+                                    <button type="button" class="room" id="room" data-number="3">3</button>
+                                    <button type="button" class="room" id="room" data-number="4">4</button>
+                                    <button type="button" class="room" id="room" data-number="5">5+</button>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-2">
+                                <div class="example">
+                                    <div id="size"></div>
+                                    <div class="display__flex">
+                                        <input type="number" min="0" max="200" step="1" id="input-number1">
+                                        <input type="number" min="0" max="200" step="1" id="input-number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-3">
+                                <div class="example">
+                                    <div id="price"></div>
+                                    <div class="display__flex">
+                                        <input type="number" min="2000" max="200000" step="100" id="price-number1">
+                                        <input type="number" min="2000" max="200000" step="100" id="price-number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-4">
+                                <div class="input-field col s12">
+                                    <select multiple id="region" class="select_all">
+                                        <option value="" disabled selected>Choose region</option>
+                                        <option value="alamedin">Alamedin</option>
+                                        <option value="belovodskoe">Belovodskoe</option>
+                                        <option value="dachnoe">Dachnoe</option>
+                                        <option value="ivanovka">Ivanovka</option>
+                                        <option value="kant">Kant</option>
+                                        <option value="kok-jar">Kok-Jar</option>
+                                        <option value="lebedinovka">Lebedinovka</option>
+                                        <option value="oktabyrski">Oktabyrski</option>
+                                        <option value="pervomaisi">Pervomaisi</option>
+                                    </select>
+                                    <label>Region</label>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-5">
+                                <div class="input-field col s12">
+                                    <select multiple id="street">
+                                        <option value="" disabled selected>Choose street</option>
+                                        <option value="12 microdistrict">12 microdistrict</option>
+                                        <option value="11 microdistrict">11 microdistrict</option>
+                                        <option value="10 microdistrict">10 microdistrict</option>
+                                        <option value="9 microdistrict">9 microdistrict</option>
+                                        <option value="8 microdistrict">8 microdistrict</option>
+                                        <option value="7 microdistrict">7 microdistrict</option>
+                                        <option value="6 microdistrict">6 microdistrict</option>
+                                        <option value="5 microdistrict">5 microdistrict</option>
+                                        <option value="4 microdistrict">4 microdistrict</option>
+                                        <option value="abdymomunova">Abdymomunova</option>
+                                    </select>
+                                    <label>Streets</label>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-6">
+                                <div class="link__parent">
+                                    <a href="#" class="link" id="link">Show results</a>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                 </div>
             </div>

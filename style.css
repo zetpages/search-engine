@@ -197,9 +197,21 @@ button:focus {
     width: 49%;
 }
 
+li {
+  margin-top: 10px;
+  border-bottom: 1px solid #333;
+}
+
+img {
+  width: 5%;
+}
 
 
-
+@media  screen and (max-width: 767px) {
+    .display__grid {
+      display: block;
+    }
+}
 
 
 
