@@ -1466,7 +1466,8 @@ function filterPropTypes(arr) {
     let typeValue = '';
 
     for (let i = 0; i < type.length; i++) {
-        if (type[i].classList.contains('active')) {
+        // if (type[i].classList.contains('active')) {
+        if (type[i].getAttribute('aria-selected') === 'true') {
             typeValue = String(type[i].getAttribute('data-value'));
         }
     }
@@ -1474,7 +1475,7 @@ function filterPropTypes(arr) {
     let filteredPropTypes = arr.filter((el) => el.type == typeValue)
 
     // console.log(filteredPropTypes);
-    console.log(typeValue);
+    // console.log(typeValue);
     return filteredPropTypes;
 }
 
@@ -1621,14 +1622,17 @@ function runner() {
     return filterPropRegionAndStreet(propers);
 }
 
-for (let i = 0; i < type.length; i++) {
-    // console.log(type[i]);
-    type[i].addEventListener('click', () => {
-        // filterPropRegion(propers);
-        runner()
-        // console.log(type[i]);
-    });
-}
+// for (let i = 0; i < type.length; i++) {
+//     // console.log(type[i]);
+//     type[i].addEventListener('click', () => {
+//         // filterPropRegion(propers);
+//         runner()
+//         // console.log(type[i]);
+//     });
+// }
+
+// console.log(type);
+// console.log(type.length);
 
 for (let i = 0; i < room.length; i++) {
     room[i].addEventListener('click', () => {
@@ -1713,14 +1717,14 @@ function Tabs(args) {
      * @param trigger {string} Element that toggles content
      * @param content {string} Classname for the content
      */
-    var defaults = {
+    let defaults = {
         container: '[data-tab-component]',
         trigger: '[role="tab"]',
         content: '[role="tabpanel"]'
     };
 
     // If there are no settings overrides
-    var settings = (typeof args !== 'undefined') ? args : defaults;
+    let settings = (typeof args !== 'undefined') ? args : defaults;
 
     /**
      * @function toggle()
@@ -1729,15 +1733,15 @@ function Tabs(args) {
      *
      * @returns null
      */
-    var toggle = function () {
-        var parent = this.closest(settings.container),
+    let toggle = function () {
+        let parent = this.closest(settings.container),
             target = this.getAttribute('aria-controls'),
             content = document.getElementById(target),
             toggles = parent.querySelectorAll(settings.trigger),
             all_content = parent.querySelectorAll(settings.content);
 
         // Update visibility
-        for (var i = 0, len = toggles.length; i < len; i++) {
+        for (let i = 0, len = toggles.length; i < len; i++) {
             toggles[i].setAttribute('aria-selected', 'false');
             all_content[i].setAttribute('aria-hidden', 'true');
         }
@@ -1753,16 +1757,17 @@ function Tabs(args) {
      *
      * @returns null
      */
-    var bindEventListeners = function () {
-        var trigger = document.querySelectorAll(settings.trigger);
+    let bindEventListeners = function () {
+        let trigger = document.querySelectorAll(settings.trigger);
 
         //
         // TODO
         // Use event delgation to add event handlers
         //
-        for (var i = 0, len = trigger.length; i < len; i++) {
+        for (let i = 0, len = trigger.length; i < len; i++) {
             trigger[i].addEventListener('click', function (event) {
                 toggle.call(this);
+                runner();
             });
 
             trigger[i].addEventListener('keydown', function (event) {
@@ -1778,5 +1783,5 @@ function Tabs(args) {
 
 // Create an instance of component
 window.onload = function () {
-    var tabs = new Tabs();
+    let tabs = new Tabs();
 };
