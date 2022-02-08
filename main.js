@@ -26,6 +26,11 @@ let officePriceNumber = document.getElementById('office-price-number');
 let officePriceNumber1 = document.getElementById('office-price-number1');
 
 
+let parentRooms = document.querySelectorAll('.select__rooms');
+
+let childRooms = parentRooms[0].querySelectorAll('button');
+let childRooms1 = parentRooms[1].querySelectorAll('button');
+
 
 // generating random property key values start!
 
@@ -57,8 +62,6 @@ let images = [
 let regions = ['alamedin', 'belovodskoe', 'dachnoe', 'ivanovka', 'kant', 'kok-jar', 'lebedinovka', 'leninski', 'oktabyrski', 'pervomaiski'];
 let streets = ['12 microdistrict', '11 microdistrict', '10 microdistrict', '9 microdistrict', '8 microdistrict', '7 microdistrict', '6 microdistrict', '5 microdistrict', '4 microdistrict', 'abdymomunova'];
 
-// console.log(random_images(images));
-
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -80,15 +83,10 @@ for (let i = 0; i < 100; i++) {
     });
 }
 
-
 // generating random property key values end!
 
 
-
-
-
 // ----------------------------------------
-
 
 noUiSlider.create(size, {
     start: [0, 200],
@@ -222,13 +220,26 @@ function filterPropTypes(arr) {
 function filterPropRooms(arr) {
     const roomsValue = [];
     const tempRoomsValue = [1, 2, 3, 4, 5];
-
-    for (let j = 0; j < room.length; j++) {
-        if (room[j].classList.contains('selected')) {
-            const tempRoom = parseInt(room[j].getAttribute('data-number'));
-            roomsValue.push(tempRoom);
+    for (let i = 0; i < type.length; i++) {
+        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'apartment') {
+            for (let j = 0; j < childRooms.length; j++) {
+                if (childRooms[j].classList.contains('selected')) {
+                    const tempRoom = parseInt(childRooms[j].getAttribute('data-number'));
+                    roomsValue.push(tempRoom);
+                }
+            }
+        } else {
+            for (let j = 0; j < childRooms1.length; j++) {
+                if (childRooms1[j].classList.contains('selected')) {
+                    const tempRoom = parseInt(childRooms1[j].getAttribute('data-number'));
+                    roomsValue.push(tempRoom);
+                }
+            }
         }
     }
+
+
+
 
     let tempFilteredPropRooms = arr.filter((el) => {
         if (roomsValue.length > 0) {
@@ -246,20 +257,10 @@ function filterPropRooms(arr) {
         }
     });
     let filteredPropRooms = filterPropTypes(tempFilteredPropRooms);
+    console.log(roomsValue);
     return filteredPropRooms;
 }
 
-
-// function filterPropSize(arr) {
-//     const minSizeValue = parseInt(inputNumber1.value);
-//     const maxSizeValue = parseInt(inputNumber.value);
-
-//     let tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValue && maxSizeValue >= el.size);
-
-//     let filteredPropSize = filterPropRooms(tempFilteredPropSize);
-
-//     return filteredPropSize;
-// }
 
 function filterPropSize(arr) {
     const minSizeValue = parseInt(inputNumber1.value);
@@ -279,13 +280,9 @@ function filterPropSize(arr) {
 
     if (typeValue == 'office') {
         tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValueOffice && maxSizeValueOffice >= el.size);
-    }
-
-    else {
+    } else {
         tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValue && maxSizeValue >= el.size);
     }
-
-    // tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValue && maxSizeValue >= el.size);
 
     let filteredPropSize = filterPropRooms(tempFilteredPropSize);
 
@@ -321,46 +318,32 @@ function filterPropPrice(arr) {
 }
 
 
-function filterPropRegionAndStreet(arr) {
-    // let options = document.getElementsByClassName('region');
-    // let regionValues = [];
-    // let tempOpt = [];
-    // for (let i = 0; i < options.length; i++) {
-    //     tempOpt = options[i].selectedOptions;
-    //     regionValues = Array.from(tempOpt).map(({ value }) => value);
-    //     console.log(regionValues);
-    //     regionValues.shift();
-    //     console.log("len offfffff the is    " + regionValues.length);
-    //     console.log(typeof (regionValues));
-    // }
 
-    let options;
+
+function filterPropRegionAndStreet(arr) {
+
+    let optionsRegion;
+    let optionsStreet;
 
     for (let i = 0; i < type.length; i++) {
-        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'office') {
-            options = document.querySelectorAll('.region')[1].selectedOptions;
+        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'apartment') {
+            optionsRegion = document.querySelectorAll('.region')[0].selectedOptions;
+            optionsStreet = document.querySelectorAll('.street')[0].selectedOptions;
         }
-        else if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'apartment') {
-            options = document.querySelectorAll('.region')[0].selectedOptions;
+        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'office') {
+            optionsRegion = document.querySelectorAll('.region')[1].selectedOptions;
+            optionsStreet = document.querySelectorAll('.street')[1].selectedOptions;
         }
     }
-
-    // let options = document.getElementById('region').selectedOptions;
-    let regionValues = Array.from(options).map(({ value }) => value);
+    let regionValues = Array.from(optionsRegion).map(({ value }) => value);
     regionValues.shift();
     console.log(regionValues);
 
-    // let options = document.getElementById('region').selectedOptions;
-    // let regionValues = Array.from(options).map(({ value }) => value);
-    // regionValues.shift();
-    // console.log(regionValues);
-
-    let tempFilteredPropRegion = [];
-
-    let optionsStreet = document.getElementById('street').selectedOptions;
     let streetValues = Array.from(optionsStreet).map(({ value }) => value);
     streetValues.shift();
+    console.log(streetValues);
 
+    let tempFilteredPropRegion = [];
     let tempFilteredPropStreet = [];
     let tempFilteredPropRegionAndStreet = [];
 
@@ -445,9 +428,22 @@ function runner() {
 }
 
 
-for (let i = 0; i < room.length; i++) {
-    room[i].addEventListener('click', () => {
-        room[i].classList.toggle('selected');
+// let parentRooms = document.querySelectorAll('.select__rooms');
+
+// let childRooms = parentRooms[0].querySelectorAll('button');
+
+for (let i = 0; i < childRooms.length; i++) {
+    childRooms[i].addEventListener('click', () => {
+        childRooms[i].classList.toggle('selected');
+        runner()
+    });
+}
+
+// let childRooms1 = parentRooms[1].querySelectorAll('button');
+
+for (let i = 0; i < childRooms1.length; i++) {
+    childRooms1[i].addEventListener('click', () => {
+        childRooms1[i].classList.toggle('selected');
         runner()
     });
 }
@@ -486,6 +482,14 @@ let childLi3 = parentUl[2].querySelectorAll('li');
 
 for (let t = 0; t < childLi3.length; t++) {
     childLi3[t].addEventListener('click', () => {
+        runner()
+    });
+}
+
+let childLi4 = parentUl[3].querySelectorAll('li');
+
+for (let t = 0; t < childLi4.length; t++) {
+    childLi4[t].addEventListener('click', () => {
         runner()
     });
 }
@@ -539,10 +543,13 @@ function Tabs(args) {
         for (let i = 0, len = toggles.length; i < len; i++) {
             toggles[i].setAttribute('aria-selected', 'false');
             all_content[i].setAttribute('aria-hidden', 'true');
+            all_content[i].classList.remove('anime');
         }
 
         this.setAttribute('aria-selected', 'true');
         content.setAttribute('aria-hidden', 'false');
+        content.classList.add('anime');
+
     };
 
     /**
@@ -568,6 +575,7 @@ function Tabs(args) {
             trigger[i].addEventListener('keydown', function (event) {
                 if (event.which == 13) {
                     toggle.call(this);
+                    runner();
                 }
             });
         };

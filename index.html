@@ -18,22 +18,20 @@
                 <!-- <div class="col s12"></div> -->
                 <div data-tab-component>
                     <div role="tablist" aria-label="Tabbed content">
-                        <button role="tab" aria-selected="true" aria-controls="tab1-content" class="type" id="type"
+                        <button role="tab" aria-selected="true" aria-controls="tab1-content" class="type" id="apartment"
                             data-value="apartment">
                             Apartment
                         </button>
-
-                        <button role="tab" aria-selected="false" aria-controls="tab2-content" class="type" id="type"
+                        <button role="tab" aria-selected="false" aria-controls="tab3-content" class="type"
+                            id="new-build" data-value="new">
+                            New
+                        </button>
+                        <button role="tab" aria-selected="false" aria-controls="tab2-content" class="type" id="house"
                             data-value="house">
                             House
                         </button>
 
-                        <button role="tab" aria-selected="false" aria-controls="tab3-content" class="type" id="type"
-                            data-value="new">
-                            New
-                        </button>
-
-                        <button role="tab" aria-selected="false" aria-controls="tab4-content" class="type" id="type"
+                        <button role="tab" aria-selected="false" aria-controls="tab4-content" class="type" id="office"
                             data-value="office">
                             Office
                         </button>
@@ -44,11 +42,11 @@
                             <div class="grid__item grid__item-1">
                                 <div class="select__rooms">
                                     <p>Rooms</p>
-                                    <button type="button" class="room" id="room" data-number="1">1</button>
-                                    <button type="button" class="room" id="room" data-number="2">2</button>
-                                    <button type="button" class="room" id="room" data-number="3">3</button>
-                                    <button type="button" class="room" id="room" data-number="4">4</button>
-                                    <button type="button" class="room" id="room" data-number="5">5+</button>
+                                    <button type="button" class="room" id="room1" data-number="1">1</button>
+                                    <button type="button" class="room" id="room2" data-number="2">2</button>
+                                    <button type="button" class="room" id="room3" data-number="3">3</button>
+                                    <button type="button" class="room" id="room4" data-number="4">4</button>
+                                    <button type="button" class="room" id="room5" data-number="5">5+</button>
                                 </div>
                             </div>
                             <div class="grid__item grid__item-2">
@@ -88,7 +86,7 @@
                             </div>
                             <div class="grid__item grid__item-5">
                                 <div class="input-field col s12">
-                                    <select multiple id="street">
+                                    <select multiple id="street" class="street">
                                         <option value="" disabled selected>Choose street</option>
                                         <option value="12 microdistrict">12 microdistrict</option>
                                         <option value="11 microdistrict">11 microdistrict</option>
@@ -149,11 +147,11 @@
                             <div class="grid__item grid__item-1">
                                 <div class="select__rooms">
                                     <p>Rooms</p>
-                                    <button type="button" class="room" id="room" data-number="1">1</button>
-                                    <button type="button" class="room" id="room" data-number="2">2</button>
-                                    <button type="button" class="room" id="room" data-number="3">3</button>
-                                    <button type="button" class="room" id="room" data-number="4">4</button>
-                                    <button type="button" class="room" id="room" data-number="5">5+</button>
+                                    <button type="button" class="room" id="room11" data-number="1">1</button>
+                                    <button type="button" class="room" id="room22" data-number="2">2</button>
+                                    <button type="button" class="room" id="room33" data-number="3">3</button>
+                                    <button type="button" class="room" id="room44" data-number="4">4</button>
+                                    <button type="button" class="room" id="room55" data-number="5">5+</button>
                                 </div>
                             </div>
                             <div class="grid__item grid__item-2">
@@ -178,7 +176,7 @@
                             </div>
                             <div class="grid__item grid__item-4">
                                 <div class="input-field col s12">
-                                    <select multiple id="regionOf" class="region">
+                                    <select multiple id="region-office" class="region">
                                         <option value="" disabled selected>Choose region</option>
                                         <option value="alamedin">Alamedin</option>
                                         <option value="belovodskoe">Belovodskoe</option>
@@ -193,10 +191,10 @@
                                     <label>Region</label>
                                 </div>
                             </div>
-                            <!--
+
                             <div class="grid__item grid__item-5">
                                 <div class="input-field col s12">
-                                    <select multiple id="street">
+                                    <select multiple id="street-office" class="street">
                                         <option value="" disabled selected>Choose street</option>
                                         <option value="12 microdistrict">12 microdistrict</option>
                                         <option value="11 microdistrict">11 microdistrict</option>
@@ -211,7 +209,7 @@
                                     </select>
                                     <label>Streets</label>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="grid__item grid__item-6">
                                 <div class="link__parent">
                                     <span class="link" id="link">Show results</span>

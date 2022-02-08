@@ -97,7 +97,11 @@ li {
 }
 
 li {
-    animation: smooth .3s ease-in-out;
+    animation: smooth .5s ease-in-out;
+}
+
+.anime {
+  animation: smooth .3s ease-in-out;
 }
 
 .room {
