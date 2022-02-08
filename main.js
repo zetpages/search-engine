@@ -190,10 +190,10 @@ priceOffice.noUiSlider.on('update', function (values, handle) {
     let value3 = values[handle];
 
     if (handle) {
-        priceNumber.value = Math.round(value3);
+        officePriceNumber1.value = Math.round(value3);
         runner();
     } else {
-        priceNumber1.value = Math.round(value3);
+        officePriceNumber.value = Math.round(value3);
         runner();
     }
 });
@@ -269,6 +269,7 @@ function filterPropSize(arr) {
     const maxSizeValueOffice = parseInt(officeSizeNumber1.value);
 
     let tempFilteredPropSize = [];
+    let typeValue = '';
 
     for (let i = 0; i < type.length; i++) {
         if (type[i].getAttribute('aria-selected') === 'true') {
@@ -291,11 +292,28 @@ function filterPropSize(arr) {
     return filteredPropSize;
 }
 
+
 function filterPropPrice(arr) {
     const minPriceValue = parseInt(priceNumber1.value);
     const maxPriceValue = parseInt(priceNumber.value);
 
-    let tempFilteredPropPrice = arr.filter((el) => el.price >= minPriceValue && maxPriceValue >= el.price);
+    const minPriceValueOffice = parseInt(officePriceNumber.value);
+    const maxPriceValueOffice = parseInt(officePriceNumber1.value);
+
+    let tempFilteredPropPrice = [];
+    let typeValue = '';
+
+    for (let i = 0; i < type.length; i++) {
+        if (type[i].getAttribute('aria-selected') === 'true') {
+            typeValue = String(type[i].getAttribute('data-value'));
+        }
+    }
+
+    if (typeValue == 'office') {
+        tempFilteredPropPrice = arr.filter((el) => el.price >= minPriceValueOffice && maxPriceValueOffice >= el.price);
+    } else {
+        tempFilteredPropPrice = arr.filter((el) => el.price >= minPriceValue && maxPriceValue >= el.price);
+    }
 
     let filteredPropPrice = filterPropSize(tempFilteredPropPrice);
 
@@ -308,6 +326,9 @@ function filterPropRegionAndStreet(arr) {
     let regionValues = Array.from(options).map(({ value }) => value);
     regionValues.shift();
 
+    console.log(regionValues);
+    console.log(options);
+
     let tempFilteredPropRegion = [];
 
     let optionsStreet = document.getElementById('street').selectedOptions;
@@ -315,9 +336,9 @@ function filterPropRegionAndStreet(arr) {
     streetValues.shift();
     let tempFilteredPropStreet = [];
 
-    let rLength = regionValues.length;
-    let sLength = streetValues.length;
-    let maxLength = Math.max(rLength, sLength);
+    // let rLength = regionValues.length;
+    // let sLength = streetValues.length;
+    // let maxLength = Math.max(rLength, sLength);
 
     let tempFilteredPropRegionAndStreet = [];
 
