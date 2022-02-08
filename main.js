@@ -324,16 +324,6 @@ function filterPropPrice(arr) {
     return filteredPropPrice;
 }
 
-// function filterPropComplex(arr) {
-//     let optionsStreet;
-
-//     for (let i = 0; i < type.length; i++) {
-//         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'new') {
-//             optionsRegion = document.querySelectorAll('.region')[0].selectedOptions;
-
-//         }
-//     }
-// }
 
 
 function filterPropRegionAndStreet(arr) {
@@ -379,7 +369,7 @@ function filterPropRegionAndStreet(arr) {
                 }
             }
         });
-        tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
+        tempFilteredPropRegionAndStreet = filterPropComplex(tempoTempoSorted);
     } else {
         if (regionValues.length > 0 || streetValues.length > 0) {
             if (regionValues.length > 0 && streetValues.length == 0) {
@@ -390,7 +380,7 @@ function filterPropRegionAndStreet(arr) {
                         }
                     }
                 });
-                tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropRegion);
+                tempFilteredPropRegionAndStreet = filterPropComplex(tempFilteredPropRegion);
             }
             if (regionValues.length == 0 && streetValues.length > 0) {
                 tempFilteredPropStreet = arr.filter((el) => {
@@ -400,10 +390,10 @@ function filterPropRegionAndStreet(arr) {
                         }
                     }
                 });
-                tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropStreet);
+                tempFilteredPropRegionAndStreet = filterPropComplex(tempFilteredPropStreet);
             }
         } else {
-            tempFilteredPropRegionAndStreet = filterPropPrice(propers);
+            tempFilteredPropRegionAndStreet = filterPropComplex(propers);
         }
     }
 
@@ -439,8 +429,55 @@ function filterPropRegionAndStreet(arr) {
 }
 
 
+
+
+
+function filterPropComplex(arr) {
+    let optionsComplex = [];
+    let condNew = false;
+
+
+    for (let i = 0; i < type.length; i++) {
+        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'new') {
+            condNew = true;
+            console.log(condNew);
+            optionsComplex = document.getElementById('complex').selectedOptions;
+        }
+    }
+
+    let complexValues = Array.from(optionsComplex).map(({ value }) => value);
+    complexValues.shift();
+    console.log(complexValues);
+
+    let tempFilteredPropComplex = [];
+    let filteredPropComplex = [];
+
+    if (condNew && complexValues.length > 0) {
+        console.log("if (condNew && complexValues.length > 0)");
+        tempFilteredPropComplex = arr.filter((el) => {
+            for (let i = 0; i < complexValues.length; i++) {
+                if (el.complex == complexValues[i]) {
+                    console.log("found " + el.complex + " = " + complexValues[i]);
+                    return true;
+                }
+            }
+        });
+        // filteredPropComplex = filterPropRegionAndStreet(tempFilteredPropComplex);
+        filteredPropComplex = filterPropPrice(tempFilteredPropComplex);
+    } else {
+        filteredPropComplex = filterPropPrice(propers);
+    }
+
+    return filteredPropComplex;
+}
+
+
+
+
+
 function runner() {
     return filterPropRegionAndStreet(propers);
+    // filterPropComplex(propers);
 }
 
 
