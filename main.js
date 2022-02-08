@@ -1,7 +1,7 @@
 let elems = document.querySelectorAll('select');
 let instances = M.FormSelect.init(elems, {});
 
-const room = document.getElementsByClassName("room");
+// const room = document.getElementsByClassName("room");
 const type = document.getElementsByClassName("type");
 
 const list = document.getElementById("list");
@@ -43,14 +43,20 @@ function random_item(types) {
 function random_images(images) {
 
     tempImages = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < getRandomIntInclusive(2, 8); i++) {
         tempImages.push(images[Math.floor(Math.random() * images.length)]);
     }
 
     return tempImages;
 }
 let types = ['house', 'apartment', 'new', 'office'];
+let complexes = ['london', 'royal', 'vegas', 'avangard', 'elite'];
 let images = [
+    'https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=',
+    'https://images.unsplash.com/photo-1542144612-1b3641ec3459?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1542241647-9cbbada2b309?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1542047415514-7d8dde4459f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1542553458-79a13aebfda6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
     'https://images.unsplash.com/photo-1548103662-ddcb912e3fe3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NnwxMjI0MjgyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
     'https://images.unsplash.com/photo-1604804221869-d4e1a8f27ed8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHwxMjI0MjgyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
     'https://images.unsplash.com/photo-1605087610901-fe3ed05fc126?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8M3wxMjI0MjgyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
@@ -79,6 +85,7 @@ for (let i = 0; i < 100; i++) {
         type: random_item(types),
         region: random_item(regions),
         street: random_item(streets),
+        complex: random_item(complexes),
         image: random_images(images),
     });
 }
@@ -278,7 +285,7 @@ function filterPropSize(arr) {
         }
     }
 
-    if (typeValue == 'office') {
+    if (typeValue == 'new') {
         tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValueOffice && maxSizeValueOffice >= el.size);
     } else {
         tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValue && maxSizeValue >= el.size);
@@ -306,7 +313,7 @@ function filterPropPrice(arr) {
         }
     }
 
-    if (typeValue == 'office') {
+    if (typeValue == 'new') {
         tempFilteredPropPrice = arr.filter((el) => el.price >= minPriceValueOffice && maxPriceValueOffice >= el.price);
     } else {
         tempFilteredPropPrice = arr.filter((el) => el.price >= minPriceValue && maxPriceValue >= el.price);
@@ -317,7 +324,16 @@ function filterPropPrice(arr) {
     return filteredPropPrice;
 }
 
+// function filterPropComplex(arr) {
+//     let optionsStreet;
 
+//     for (let i = 0; i < type.length; i++) {
+//         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'new') {
+//             optionsRegion = document.querySelectorAll('.region')[0].selectedOptions;
+
+//         }
+//     }
+// }
 
 
 function filterPropRegionAndStreet(arr) {
@@ -330,7 +346,7 @@ function filterPropRegionAndStreet(arr) {
             optionsRegion = document.querySelectorAll('.region')[0].selectedOptions;
             optionsStreet = document.querySelectorAll('.street')[0].selectedOptions;
         }
-        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'office') {
+        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'new') {
             optionsRegion = document.querySelectorAll('.region')[1].selectedOptions;
             optionsStreet = document.querySelectorAll('.street')[1].selectedOptions;
         }
@@ -402,7 +418,7 @@ function filterPropRegionAndStreet(arr) {
             imgItem.src = el.image[i];
             propImgBox.appendChild(imgItem);
         }
-        propInfo.textContent = el.title = 'type: ' + el.type + ', ____ rooms: ' + el.rooms + ',  ____ size: ' + el.size + ',  ____ price: ' + el.price + ', ____ region: ' + el.region + ', ____ street: ' + el.street;
+        propInfo.textContent = el.title = 'type: ' + el.type + ', ____ rooms: ' + el.rooms + ',  ____ size: ' + el.size + ',  ____ price: ' + el.price + ', ____ region: ' + el.region + ', ____ street: ' + el.street + ', ____ complex: ' + el.complex;
 
 
         propItem.appendChild(propImgBox);
@@ -461,6 +477,7 @@ priceNumber1.addEventListener('change', runner);
 
 let parentUl = document.querySelectorAll('.select-wrapper');
 
+
 let childLi1 = parentUl[0].querySelectorAll('li');
 
 for (let t = 0; t < childLi1.length; t++) {
@@ -490,6 +507,14 @@ let childLi4 = parentUl[3].querySelectorAll('li');
 
 for (let t = 0; t < childLi4.length; t++) {
     childLi4[t].addEventListener('click', () => {
+        runner()
+    });
+}
+
+let childLi5 = parentUl[4].querySelectorAll('li');
+
+for (let t = 0; t < childLi5.length; t++) {
+    childLi5[t].addEventListener('click', () => {
         runner()
     });
 }
