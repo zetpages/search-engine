@@ -5,7 +5,7 @@ const room = document.getElementsByClassName("room");
 const type = document.getElementsByClassName("type");
 
 const list = document.getElementById("list");
-const link = document.getElementById("link");
+const link = document.getElementsByClassName("link");
 
 let size = document.getElementById('size');
 let sizeOffice = document.getElementById('sizeOffice');
@@ -57,7 +57,7 @@ let images = [
 let regions = ['alamedin', 'belovodskoe', 'dachnoe', 'ivanovka', 'kant', 'kok-jar', 'lebedinovka', 'leninski', 'oktabyrski', 'pervomaiski'];
 let streets = ['12 microdistrict', '11 microdistrict', '10 microdistrict', '9 microdistrict', '8 microdistrict', '7 microdistrict', '6 microdistrict', '5 microdistrict', '4 microdistrict', 'abdymomunova'];
 
-console.log(random_images(images));
+// console.log(random_images(images));
 
 
 function getRandomIntInclusive(min, max) {
@@ -322,25 +322,48 @@ function filterPropPrice(arr) {
 
 
 function filterPropRegionAndStreet(arr) {
-    let options = document.getElementById('region').selectedOptions;
+    // let options = document.getElementsByClassName('region');
+    // let regionValues = [];
+    // let tempOpt = [];
+    // for (let i = 0; i < options.length; i++) {
+    //     tempOpt = options[i].selectedOptions;
+    //     regionValues = Array.from(tempOpt).map(({ value }) => value);
+    //     console.log(regionValues);
+    //     regionValues.shift();
+    //     console.log("len offfffff the is    " + regionValues.length);
+    //     console.log(typeof (regionValues));
+    // }
+
+    let options;
+
+    for (let i = 0; i < type.length; i++) {
+        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'office') {
+            options = document.querySelectorAll('.region')[1].selectedOptions;
+        }
+        else if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'apartment') {
+            options = document.querySelectorAll('.region')[0].selectedOptions;
+        }
+    }
+
+    // let options = document.getElementById('region').selectedOptions;
     let regionValues = Array.from(options).map(({ value }) => value);
     regionValues.shift();
-
     console.log(regionValues);
-    console.log(options);
+
+    // let options = document.getElementById('region').selectedOptions;
+    // let regionValues = Array.from(options).map(({ value }) => value);
+    // regionValues.shift();
+    // console.log(regionValues);
 
     let tempFilteredPropRegion = [];
 
     let optionsStreet = document.getElementById('street').selectedOptions;
     let streetValues = Array.from(optionsStreet).map(({ value }) => value);
     streetValues.shift();
+
     let tempFilteredPropStreet = [];
-
-    // let rLength = regionValues.length;
-    // let sLength = streetValues.length;
-    // let maxLength = Math.max(rLength, sLength);
-
     let tempFilteredPropRegionAndStreet = [];
+
 
     if (regionValues.length > 0 && streetValues.length > 0) {
         let tempoTempo = arr.filter((el) => {
@@ -407,8 +430,10 @@ function filterPropRegionAndStreet(arr) {
         // console.log(el.image);
     });
 
-    const listLength = list.children.length;
-    link.textContent = `Show ${listLength} results`;
+    for (let i = 0; i < link.length; i++) {
+        const listLength = list.children.length;
+        link[i].textContent = `Show ${listLength} results`;
+    }
 
     console.log(tempFilteredPropRegionAndStreet);
     return tempFilteredPropRegionAndStreet;
@@ -453,6 +478,14 @@ let childLi2 = parentUl[1].querySelectorAll('li');
 
 for (let t = 0; t < childLi2.length; t++) {
     childLi2[t].addEventListener('click', () => {
+        runner()
+    });
+}
+
+let childLi3 = parentUl[2].querySelectorAll('li');
+
+for (let t = 0; t < childLi3.length; t++) {
+    childLi3[t].addEventListener('click', () => {
         runner()
     });
 }
