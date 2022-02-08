@@ -211,13 +211,6 @@ img {
 }
 
 
-@media  screen and (max-width: 767px) {
-    .display__grid {
-      display: block;
-    }
-}
-
-
 
 
 
@@ -300,4 +293,16 @@ img {
 }
 [data-tab-component] [role=tabpanel][aria-hidden=true] {
   display: none;
+}
+
+
+@media  screen and (max-width: 767px) {
+    .display__grid {
+      display: block;
+    }
+}
+@media  screen and (max-width: 420px) {
+  [data-tab-component] [role=tabpanel] {
+    padding: 0;
+  }
 }
