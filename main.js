@@ -8,14 +8,22 @@ const list = document.getElementById("list");
 const link = document.getElementById("link");
 
 let size = document.getElementById('size');
+let sizeOffice = document.getElementById('sizeOffice');
 
 let inputNumber = document.getElementById('input-number');
 let inputNumber1 = document.getElementById('input-number1');
 
 let price = document.getElementById('price');
+let priceOffice = document.getElementById('priceOffice');
 
 let priceNumber = document.getElementById('price-number');
 let priceNumber1 = document.getElementById('price-number1');
+
+let officeSizeNumber = document.getElementById('office-size-number');
+let officeSizeNumber1 = document.getElementById('office-size-number1');
+
+let officePriceNumber = document.getElementById('office-price-number');
+let officePriceNumber1 = document.getElementById('office-price-number1');
 
 
 
@@ -77,7 +85,10 @@ for (let i = 0; i < 100; i++) {
 
 
 
-// ---------------------------------------
+
+
+// ----------------------------------------
+
 
 noUiSlider.create(size, {
     start: [0, 200],
@@ -88,7 +99,6 @@ noUiSlider.create(size, {
         'max': 200
     }
 });
-
 
 
 size.noUiSlider.on('update', function (values, handle) {
@@ -103,6 +113,7 @@ size.noUiSlider.on('update', function (values, handle) {
         runner();
     }
 });
+
 // ----------------------------------------
 
 // ----------------------------------------
@@ -131,6 +142,63 @@ price.noUiSlider.on('update', function (values, handle) {
         runner();
     }
 });
+
+
+// ---------------------------------------
+
+noUiSlider.create(sizeOffice, {
+    start: [0, 200],
+    connect: true,
+    tooltips: true,
+    range: {
+        'min': 0,
+        'max': 200
+    }
+});
+
+
+
+sizeOffice.noUiSlider.on('update', function (values, handle) {
+
+    let value2 = values[handle];
+
+    if (handle) {
+        officeSizeNumber1.value = Math.round(value2);
+        runner()
+    } else {
+        officeSizeNumber.value = Math.round(value2);
+        runner();
+    }
+});
+
+// ----------------------------------------
+
+noUiSlider.create(priceOffice, {
+    start: [2000, 200000],
+    connect: true,
+    tooltips: true,
+    range: {
+        'min': 2000,
+        'max': 200000
+    }
+});
+
+
+
+priceOffice.noUiSlider.on('update', function (values, handle) {
+
+    let value3 = values[handle];
+
+    if (handle) {
+        priceNumber.value = Math.round(value3);
+        runner();
+    } else {
+        priceNumber1.value = Math.round(value3);
+        runner();
+    }
+});
+
+// ----------------------------------------
 
 
 function filterPropTypes(arr) {
@@ -182,11 +250,41 @@ function filterPropRooms(arr) {
 }
 
 
+// function filterPropSize(arr) {
+//     const minSizeValue = parseInt(inputNumber1.value);
+//     const maxSizeValue = parseInt(inputNumber.value);
+
+//     let tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValue && maxSizeValue >= el.size);
+
+//     let filteredPropSize = filterPropRooms(tempFilteredPropSize);
+
+//     return filteredPropSize;
+// }
+
 function filterPropSize(arr) {
     const minSizeValue = parseInt(inputNumber1.value);
     const maxSizeValue = parseInt(inputNumber.value);
 
-    let tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValue && maxSizeValue >= el.size);
+    const minSizeValueOffice = parseInt(officeSizeNumber.value);
+    const maxSizeValueOffice = parseInt(officeSizeNumber1.value);
+
+    let tempFilteredPropSize = [];
+
+    for (let i = 0; i < type.length; i++) {
+        if (type[i].getAttribute('aria-selected') === 'true') {
+            typeValue = String(type[i].getAttribute('data-value'));
+        }
+    }
+
+    if (typeValue == 'office') {
+        tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValueOffice && maxSizeValueOffice >= el.size);
+    }
+
+    else {
+        tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValue && maxSizeValue >= el.size);
+    }
+
+    // tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValue && maxSizeValue >= el.size);
 
     let filteredPropSize = filterPropRooms(tempFilteredPropSize);
 
