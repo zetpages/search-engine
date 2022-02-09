@@ -306,3 +306,9 @@ img {
     padding: 0;
   }
 }
+
+
+p {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
