@@ -334,10 +334,119 @@ function filterPropPrice(arr) {
 
 
 
+// function filterPropRegionAndStreet(arr) {
+
+//     let optionsRegion;
+//     let optionsStreet;
+
+//     for (let i = 0; i < type.length; i++) {
+//         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'apartment') {
+//             optionsRegion = document.querySelectorAll('.region')[0].selectedOptions;
+//             optionsStreet = document.querySelectorAll('.street')[0].selectedOptions;
+//         }
+//         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'new') {
+//             optionsRegion = document.querySelectorAll('.region')[1].selectedOptions;
+//             optionsStreet = document.querySelectorAll('.street')[1].selectedOptions;
+//         }
+//     }
+//     let regionValues = Array.from(optionsRegion).map(({ value }) => value);
+//     regionValues.shift();
+//     console.log(regionValues);
+
+//     let streetValues = Array.from(optionsStreet).map(({ value }) => value);
+//     streetValues.shift();
+//     console.log(streetValues);
+
+//     let tempFilteredPropRegion = [];
+//     let tempFilteredPropStreet = [];
+//     let tempFilteredPropRegionAndStreet = [];
+
+
+//     if (regionValues.length > 0 && streetValues.length > 0) {
+//         let tempoTempo = arr.filter((el) => {
+//             for (let i = 0; i < regionValues.length; i++) {
+//                 if (el.region == regionValues[i]) {
+//                     return true;
+//                 }
+//             }
+//         });
+//         let tempoTempoSorted = tempoTempo.filter((el) => {
+//             for (let i = 0; i < streetValues.length; i++) {
+//                 if (el.street == streetValues[i]) {
+//                     return true;
+//                 }
+//             }
+//         });
+//         tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
+//     } else {
+//         if (regionValues.length > 0 || streetValues.length > 0) {
+//             if (regionValues.length > 0 && streetValues.length == 0) {
+//                 tempFilteredPropRegion = arr.filter((el) => {
+//                     for (let i = 0; i < regionValues.length; i++) {
+//                         if (el.region == regionValues[i]) {
+//                             return true;
+//                         }
+//                     }
+//                 });
+//                 tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropRegion);
+//             }
+//             if (regionValues.length == 0 && streetValues.length > 0) {
+//                 tempFilteredPropStreet = arr.filter((el) => {
+//                     for (let i = 0; i < streetValues.length; i++) {
+//                         if (el.street == streetValues[i]) {
+//                             return true;
+//                         }
+//                     }
+//                 });
+//                 tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropStreet);
+//             }
+//         } else {
+//             tempFilteredPropRegionAndStreet = filterPropPrice(propers);
+//             console.log("else ======> tempFilteredPropRegionAndStreet = filterPropPrice(propers);");
+//         }
+//     }
+
+//     tempFilteredPropRegionAndStreet.forEach(el => {
+//         const items = document.createElement('li');
+//         const propItem = document.createElement('a');
+//         const propInfo = document.createElement('p');
+//         const propImgBox = document.createElement('div');
+
+//         for (let i = 0; i < el.image.length; i++) {
+//             let imgItem = document.createElement('img');
+//             imgItem.src = el.image[i];
+//             propImgBox.appendChild(imgItem);
+//         }
+//         propInfo.textContent = el.title = 'type: ' + el.type + ', ____ rooms: ' + el.rooms + ',  ____ size: ' + el.size + ',  ____ price: ' + el.price + ', ____ region: ' + el.region + ', ____ street: ' + el.street + (el.complex ? `____ complex: ${el.complex}` : '');
+
+
+//         propItem.appendChild(propImgBox);
+//         propItem.appendChild(propInfo);
+//         items.appendChild(propItem);
+//         list.appendChild(items);
+
+//         // console.log(el.image);
+//     });
+
+//     for (let i = 0; i < link.length; i++) {
+//         const listLength = list.children.length;
+//         link[i].textContent = `Show ${listLength} results`;
+//     }
+
+//     console.log(tempFilteredPropRegionAndStreet);
+//     return tempFilteredPropRegionAndStreet;
+// }
+
+
+
+
+
 function filterPropRegionAndStreet(arr) {
 
-    let optionsRegion;
-    let optionsStreet;
+    let optionsRegion = [];
+    let optionsStreet = [];
+    let optionsComplex = [];
+    let condNew = false;
 
     for (let i = 0; i < type.length; i++) {
         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'apartment') {
@@ -347,6 +456,9 @@ function filterPropRegionAndStreet(arr) {
         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'new') {
             optionsRegion = document.querySelectorAll('.region')[1].selectedOptions;
             optionsStreet = document.querySelectorAll('.street')[1].selectedOptions;
+
+            condNew = true;
+            optionsComplex = document.getElementById('complex').selectedOptions;
         }
     }
     let regionValues = Array.from(optionsRegion).map(({ value }) => value);
@@ -357,54 +469,185 @@ function filterPropRegionAndStreet(arr) {
     streetValues.shift();
     console.log(streetValues);
 
+    let complexValues = Array.from(optionsComplex).map(({ value }) => value);
+    complexValues.shift();
+    console.log(complexValues);
+
+
     let tempFilteredPropRegion = [];
     let tempFilteredPropStreet = [];
+    let tempFilteredPropComplex = [];
     let tempFilteredPropRegionAndStreet = [];
 
 
-    if (regionValues.length > 0 && streetValues.length > 0) {
-        let tempoTempo = arr.filter((el) => {
-            for (let i = 0; i < regionValues.length; i++) {
-                if (el.region == regionValues[i]) {
-                    return true;
+    if (condNew) {
+        if (regionValues.length > 0 && streetValues.length > 0 && complexValues.length > 0) {
+            let tempoTempo = arr.filter((el) => {
+                for (let i = 0; i < regionValues.length; i++) {
+                    if (el.region == regionValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoSorted = tempoTempo.filter((el) => {
+                for (let i = 0; i < streetValues.length; i++) {
+                    if (el.street == streetValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoTempoSorted = tempoTempoSorted.filter((el) => {
+                for (let i = 0; i < complexValues.length; i++) {
+                    if (el.complex == complexValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoTempoSorted);
+        }
+        else if (regionValues.length > 0 && streetValues.length > 0 && complexValues.length == 0) {
+            let tempoTempo = arr.filter((el) => {
+                for (let i = 0; i < regionValues.length; i++) {
+                    if (el.region == regionValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoSorted = tempoTempo.filter((el) => {
+                for (let i = 0; i < streetValues.length; i++) {
+                    if (el.street == streetValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
+        }
+        else if (regionValues.length > 0 && streetValues.length == 0 && complexValues.length > 0) {
+            let tempoTempo = arr.filter((el) => {
+                for (let i = 0; i < regionValues.length; i++) {
+                    if (el.region == regionValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoSorted = tempoTempo.filter((el) => {
+                for (let i = 0; i < complexValues.length; i++) {
+                    if (el.complex == complexValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
+        }
+        else if (regionValues.length == 0 && streetValues.length > 0 && complexValues.length > 0) {
+            console.log("else if (regionValues.length == 0 && streetValues.length > 0 && complexValues.length > 0) ..........................");
+            let tempoTempo = arr.filter((el) => {
+                for (let i = 0; i < streetValues.length; i++) {
+                    if (el.street == streetValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoSorted = tempoTempo.filter((el) => {
+                for (let i = 0; i < complexValues.length; i++) {
+                    if (el.complex == complexValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
+        }
+        // ---------------
+        else {
+            // ----------------------
+            if (regionValues.length > 0 || streetValues.length > 0 || complexValues.length > 0) {
+                if (regionValues.length > 0 && streetValues.length == 0 && complexValues == 0) {
+                    tempFilteredPropRegion = arr.filter((el) => {
+                        for (let i = 0; i < regionValues.length; i++) {
+                            if (el.region == regionValues[i]) {
+                                return true;
+                            }
+                        }
+                    });
+                    tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropRegion);
+                }
+                if (regionValues.length == 0 && streetValues.length > 0 && complexValues.length == 0) {
+                    tempFilteredPropStreet = arr.filter((el) => {
+                        for (let i = 0; i < streetValues.length; i++) {
+                            if (el.street == streetValues[i]) {
+                                return true;
+                            }
+                        }
+                    });
+                    tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropStreet);
+                }
+                if (regionValues.length == 0 && streetValues.length == 0 && complexValues.length > 0) {
+                    console.log(" if (regionValues.length == 0 && streetValues.length == 0 && complexValues.length > 0)");
+                    tempFilteredPropComplex = arr.filter((el) => {
+                        for (let i = 0; i < complexValues.length; i++) {
+                            if (el.complex == complexValues[i]) {
+                                return true;
+                            }
+                        }
+                    });
+                    console.log(tempFilteredPropComplex);
+                    tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropComplex);
                 }
             }
-        });
-        let tempoTempoSorted = tempoTempo.filter((el) => {
-            for (let i = 0; i < streetValues.length; i++) {
-                if (el.street == streetValues[i]) {
-                    return true;
-                }
+            // ---------------
+            else {
+                tempFilteredPropRegionAndStreet = filterPropPrice(propers);
+                console.log("else ======> tempFilteredPropRegionAndStreet = filterPropPrice(propers);");
             }
-        });
-        tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
+        }
     } else {
-        if (regionValues.length > 0 || streetValues.length > 0) {
-            if (regionValues.length > 0 && streetValues.length == 0) {
-                tempFilteredPropRegion = arr.filter((el) => {
-                    for (let i = 0; i < regionValues.length; i++) {
-                        if (el.region == regionValues[i]) {
-                            return true;
-                        }
+        if (regionValues.length > 0 && streetValues.length > 0) {
+            let tempoTempo = arr.filter((el) => {
+                for (let i = 0; i < regionValues.length; i++) {
+                    if (el.region == regionValues[i]) {
+                        return true;
                     }
-                });
-                tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropRegion);
-            }
-            if (regionValues.length == 0 && streetValues.length > 0) {
-                tempFilteredPropStreet = arr.filter((el) => {
-                    for (let i = 0; i < streetValues.length; i++) {
-                        if (el.street == streetValues[i]) {
-                            return true;
-                        }
+                }
+            });
+            let tempoTempoSorted = tempoTempo.filter((el) => {
+                for (let i = 0; i < streetValues.length; i++) {
+                    if (el.street == streetValues[i]) {
+                        return true;
                     }
-                });
-                tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropStreet);
-            }
+                }
+            });
+            tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
         } else {
-            tempFilteredPropRegionAndStreet = filterPropPrice(propers);
-            console.log("else ======> tempFilteredPropRegionAndStreet = filterPropPrice(propers);");
+            if (regionValues.length > 0 || streetValues.length > 0) {
+                if (regionValues.length > 0 && streetValues.length == 0) {
+                    tempFilteredPropRegion = arr.filter((el) => {
+                        for (let i = 0; i < regionValues.length; i++) {
+                            if (el.region == regionValues[i]) {
+                                return true;
+                            }
+                        }
+                    });
+                    tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropRegion);
+                }
+                if (regionValues.length == 0 && streetValues.length > 0) {
+                    tempFilteredPropStreet = arr.filter((el) => {
+                        for (let i = 0; i < streetValues.length; i++) {
+                            if (el.street == streetValues[i]) {
+                                return true;
+                            }
+                        }
+                    });
+                    tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropStreet);
+                }
+            } else {
+                tempFilteredPropRegionAndStreet = filterPropPrice(propers);
+                console.log("else ======> tempFilteredPropRegionAndStreet = filterPropPrice(propers);");
+            }
         }
     }
+
+
+
 
     tempFilteredPropRegionAndStreet.forEach(el => {
         const items = document.createElement('li');
@@ -436,6 +679,12 @@ function filterPropRegionAndStreet(arr) {
     console.log(tempFilteredPropRegionAndStreet);
     return tempFilteredPropRegionAndStreet;
 }
+
+
+
+
+
+
 
 
 
