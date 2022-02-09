@@ -200,37 +200,156 @@
                     </section>
 
                     <section id="tab3-content" role="tabpanel" aria-labelledby="tab3" tabindex="0" aria-hidden="true">
-                        <h3>Tab Three</h3>
+                        <div class="display__grid">
+                            <div class="grid__item grid__item-1">
+                                <div class="input-field s12">
+                                    <select multiple id="house-type" class="house-type">
+                                        <option value="" disabled selected>Choose House Type</option>
+                                        <option value="house">House</option>
+                                        <option value="townhouse">Townhouse</option>
+                                        <option value="land">Land</option>
+                                    </select>
+                                    <label>House Type</label>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-2">
+                                <div class="example">
+                                    <div id="sizeHouse"></div>
+                                    <div class="display__flex">
+                                        <input type="number" min="0" max="200" step="1" id="house-size-number">
+                                        <input type="number" min="0" max="200" step="1" id="house-size-number1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-3">
+                                <div class="example">
+                                    <div id="priceHouse"></div>
+                                    <div class="display__flex">
+                                        <input type="number" min="2000" max="200000" step="100" id="house-price-number">
+                                        <input type="number" min="2000" max="200000" step="100"
+                                            id="house-price-number1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-4">
+                                <div class="input-field col s12">
+                                    <select multiple id="region-office" class="region">
+                                        <option value="" disabled selected>Choose region</option>
+                                        <option value="alamedin">Alamedin</option>
+                                        <option value="belovodskoe">Belovodskoe</option>
+                                        <option value="dachnoe">Dachnoe</option>
+                                        <option value="ivanovka">Ivanovka</option>
+                                        <option value="kant">Kant</option>
+                                        <option value="kok-jar">Kok-Jar</option>
+                                        <option value="lebedinovka">Lebedinovka</option>
+                                        <option value="oktabyrski">Oktabyrski</option>
+                                        <option value="pervomaiski">Pervomaisi</option>
+                                    </select>
+                                    <label>Region</label>
+                                </div>
+                            </div>
 
-                        <p>Maecenas interdum est vel dui bibendum ullamcorper. Sed vel diam rhoncus, aliquam nibh ac,
-                            facilisis
-                            ipsum.
-                            Nulla eu arcu hendrerit, iaculis magna at, commodo turpis. Quisque dignissim aliquet metus,
-                            ut iaculis
-                            tellus varius at. Quisque in aliquam felis. Suspendisse potenti. Nulla augue erat, porttor a
-                            massa sit
-                            amet,
-                            vehicula accumsan lacus. Mauris massa mi, maximus nec lectus sit amet, ornare faucibus ante.
-                            Nam ac
-                            eleifend
-                            dolor.</p>
+                            <div class="grid__item grid__item-5">
+                                <div class="input-field col s12">
+                                    <select multiple id="street-office" class="street">
+                                        <option value="" disabled selected>Choose street</option>
+                                        <option value="12 microdistrict">12 microdistrict</option>
+                                        <option value="11 microdistrict">11 microdistrict</option>
+                                        <option value="10 microdistrict">10 microdistrict</option>
+                                        <option value="9 microdistrict">9 microdistrict</option>
+                                        <option value="8 microdistrict">8 microdistrict</option>
+                                        <option value="7 microdistrict">7 microdistrict</option>
+                                        <option value="6 microdistrict">6 microdistrict</option>
+                                        <option value="5 microdistrict">5 microdistrict</option>
+                                        <option value="4 microdistrict">4 microdistrict</option>
+                                        <option value="abdymomunova">Abdymomunova</option>
+                                    </select>
+                                    <label>Streets</label>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-6">
+                                <div class="link__parent">
+                                    <span class="link" id="link">Show results</span>
+                                </div>
+                            </div>
+                        </div>
                     </section>
 
                     <section id="tab4-content" role="tabpanel" aria-labelledby="tab4" tabindex="0" aria-hidden="true">
-                        <h3>Tab 4444</h3>
+                        <div class="display__grid">
+                            <div class="grid__item grid__item-1">
+                                <div class="input-field s12">
+                                    <select multiple id="new-office-type" class="new-office-type">
+                                        <option value="" disabled selected>Choose Office Type</option>
+                                        <option value="office">Office</option>
+                                        <option value="warehouse">warehouse</option>
+                                        <option value="commercial">Commercial</option>
+                                    </select>
+                                    <label>Office Type</label>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-2">
+                                <div class="example">
+                                    <div id="sizeNewOffice"></div>
+                                    <div class="display__flex">
+                                        <input type="number" min="0" max="200" step="1" id="newOffice-size-number">
+                                        <input type="number" min="0" max="200" step="1" id="newOffice-size-number1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-3">
+                                <div class="example">
+                                    <div id="priceNewOffice"></div>
+                                    <div class="display__flex">
+                                        <input type="number" min="2000" max="200000" step="100"
+                                            id="newOffice-price-number">
+                                        <input type="number" min="2000" max="200000" step="100"
+                                            id="newOffice-price-number1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-4">
+                                <div class="input-field col s12">
+                                    <select multiple id="region-office" class="region">
+                                        <option value="" disabled selected>Choose region</option>
+                                        <option value="alamedin">Alamedin</option>
+                                        <option value="belovodskoe">Belovodskoe</option>
+                                        <option value="dachnoe">Dachnoe</option>
+                                        <option value="ivanovka">Ivanovka</option>
+                                        <option value="kant">Kant</option>
+                                        <option value="kok-jar">Kok-Jar</option>
+                                        <option value="lebedinovka">Lebedinovka</option>
+                                        <option value="oktabyrski">Oktabyrski</option>
+                                        <option value="pervomaiski">Pervomaisi</option>
+                                    </select>
+                                    <label>Region</label>
+                                </div>
+                            </div>
 
-                        <p>Maecenas interdum est vel dui bibendum ullamcorper. Sed vel diam rhoncus, aliquam nibh ac,
-                            facilisis
-                            ipsum.
-                            Nulla eu arcu hendrerit, iaculis magna at, commodo turpis. Quisque dignissim aliquet metus,
-                            ut iaculis
-                            tellus varius at. Quisque in aliquam felis. Suspendisse potenti. Nulla augue erat, porttor a
-                            massa sit
-                            amet,
-                            vehicula accumsan lacus. Mauris massa mi, maximus nec lectus sit amet, ornare faucibus ante.
-                            Nam ac
-                            eleifend
-                            dolor.</p>
+                            <div class="grid__item grid__item-5">
+                                <div class="input-field col s12">
+                                    <select multiple id="street-office" class="street">
+                                        <option value="" disabled selected>Choose street</option>
+                                        <option value="12 microdistrict">12 microdistrict</option>
+                                        <option value="11 microdistrict">11 microdistrict</option>
+                                        <option value="10 microdistrict">10 microdistrict</option>
+                                        <option value="9 microdistrict">9 microdistrict</option>
+                                        <option value="8 microdistrict">8 microdistrict</option>
+                                        <option value="7 microdistrict">7 microdistrict</option>
+                                        <option value="6 microdistrict">6 microdistrict</option>
+                                        <option value="5 microdistrict">5 microdistrict</option>
+                                        <option value="4 microdistrict">4 microdistrict</option>
+                                        <option value="abdymomunova">Abdymomunova</option>
+                                    </select>
+                                    <label>Streets</label>
+                                </div>
+                            </div>
+                            <div class="grid__item grid__item-6">
+                                <div class="link__parent">
+                                    <span class="link" id="link">Show results</span>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                 </div>
             </div>

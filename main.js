@@ -9,12 +9,16 @@ const link = document.getElementsByClassName("link");
 
 let size = document.getElementById('size');
 let sizeOffice = document.getElementById('sizeOffice');
+let sizeHouse = document.getElementById('sizeHouse');
+let sizeNewOffice = document.getElementById('sizeNewOffice');
 
 let inputNumber = document.getElementById('input-number');
 let inputNumber1 = document.getElementById('input-number1');
 
 let price = document.getElementById('price');
 let priceOffice = document.getElementById('priceOffice');
+let priceHouse = document.getElementById('priceHouse');
+let priceNewOffice = document.getElementById('priceNewOffice');
 
 let priceNumber = document.getElementById('price-number');
 let priceNumber1 = document.getElementById('price-number1');
@@ -22,8 +26,21 @@ let priceNumber1 = document.getElementById('price-number1');
 let officeSizeNumber = document.getElementById('office-size-number');
 let officeSizeNumber1 = document.getElementById('office-size-number1');
 
+let houseSizeNumber = document.getElementById('house-size-number');
+let houseSizeNumber1 = document.getElementById('house-size-number1');
+
+let newOfficeSizeNumber = document.getElementById('newOffice-size-number');
+let newOfficeSizeNumber1 = document.getElementById('newOffice-size-number1');
+
+
 let officePriceNumber = document.getElementById('office-price-number');
 let officePriceNumber1 = document.getElementById('office-price-number1');
+
+let housePriceNumber = document.getElementById('house-price-number');
+let housePriceNumber1 = document.getElementById('house-price-number1');
+
+let newOfficePriceNumber = document.getElementById('newOffice-price-number');
+let newOfficePriceNumber1 = document.getElementById('newOffice-price-number1');
 
 
 let parentRooms = document.querySelectorAll('.select__rooms');
@@ -222,6 +239,120 @@ priceOffice.noUiSlider.on('update', function (values, handle) {
 });
 
 // ----------------------------------------
+// ----------------------------------------
+
+noUiSlider.create(sizeHouse, {
+    start: [0, 200],
+    connect: true,
+    tooltips: true,
+    range: {
+        'min': 0,
+        'max': 200
+    }
+});
+
+
+
+sizeHouse.noUiSlider.on('update', function (values, handle) {
+
+    let value2 = values[handle];
+
+    if (handle) {
+        houseSizeNumber1.value = Math.round(value2);
+        runner()
+    } else {
+        houseSizeNumber.value = Math.round(value2);
+        runner();
+    }
+});
+
+// ----------------------------------------
+// ----------------------------------------
+
+noUiSlider.create(priceHouse, {
+    start: [2000, 200000],
+    connect: true,
+    tooltips: true,
+    range: {
+        'min': 2000,
+        'max': 200000
+    }
+});
+
+
+
+priceHouse.noUiSlider.on('update', function (values, handle) {
+
+    let value3 = values[handle];
+
+    if (handle) {
+        housePriceNumber1.value = Math.round(value3);
+        runner();
+    } else {
+        housePriceNumber.value = Math.round(value3);
+        runner();
+    }
+});
+
+
+// ---------------------------------------
+// ---------------------------------------
+
+noUiSlider.create(sizeNewOffice, {
+    start: [0, 200],
+    connect: true,
+    tooltips: true,
+    range: {
+        'min': 0,
+        'max': 200
+    }
+});
+
+
+
+sizeNewOffice.noUiSlider.on('update', function (values, handle) {
+
+    let value2 = values[handle];
+
+    if (handle) {
+        newOfficeSizeNumber1.value = Math.round(value2);
+        runner()
+    } else {
+        newOfficeSizeNumber.value = Math.round(value2);
+        runner();
+    }
+});
+
+// ----------------------------------------
+// ----------------------------------------
+
+noUiSlider.create(priceNewOffice, {
+    start: [2000, 200000],
+    connect: true,
+    tooltips: true,
+    range: {
+        'min': 2000,
+        'max': 200000
+    }
+});
+
+
+
+priceNewOffice.noUiSlider.on('update', function (values, handle) {
+
+    let value3 = values[handle];
+
+    if (handle) {
+        newOfficePriceNumber1.value = Math.round(value3);
+        runner();
+    } else {
+        newOfficePriceNumber.value = Math.round(value3);
+        runner();
+    }
+});
+
+// ----------------------------------------
+// ----------------------------------------
 
 
 function filterPropTypes(arr) {
@@ -294,6 +425,12 @@ function filterPropSize(arr) {
     const minSizeValueOffice = parseInt(officeSizeNumber.value);
     const maxSizeValueOffice = parseInt(officeSizeNumber1.value);
 
+    const minSizeValueHouse = parseInt(houseSizeNumber.value);
+    const maxSizeValueHouse = parseInt(houseSizeNumber1.value);
+
+    const minSizeValueNewOffice = parseInt(newOfficeSizeNumber.value);
+    const maxSizeValueNewOffice = parseInt(newOfficeSizeNumber1.value);
+
     let tempFilteredPropSize = [];
     let typeValue = '';
 
@@ -305,8 +442,18 @@ function filterPropSize(arr) {
 
     if (typeValue == 'new') {
         tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValueOffice && maxSizeValueOffice >= el.size);
-    } else {
+    }
+
+    if (typeValue == 'apartment') {
         tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValue && maxSizeValue >= el.size);
+    }
+
+    if (typeValue == 'house') {
+        tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValueHouse && maxSizeValueHouse >= el.size);
+    }
+
+    if (typeValue == 'office') {
+        tempFilteredPropSize = arr.filter((el) => el.size >= minSizeValueNewOffice && maxSizeValueNewOffice >= el.size);
     }
 
     let filteredPropSize = filterPropRooms(tempFilteredPropSize);
@@ -318,6 +465,12 @@ function filterPropSize(arr) {
 function filterPropPrice(arr) {
     const minPriceValue = parseInt(priceNumber1.value);
     const maxPriceValue = parseInt(priceNumber.value);
+
+    const minPriceValueHouse = parseInt(housePriceNumber.value);
+    const maxPriceValueHouse = parseInt(housePriceNumber1.value);
+
+    const minPriceValueNewOffice = parseInt(newOfficePriceNumber.value);
+    const maxPriceValueNewOffice = parseInt(newOfficePriceNumber1.value);
 
     const minPriceValueOffice = parseInt(officePriceNumber.value);
     const maxPriceValueOffice = parseInt(officePriceNumber1.value);
@@ -333,8 +486,15 @@ function filterPropPrice(arr) {
 
     if (typeValue == 'new') {
         tempFilteredPropPrice = arr.filter((el) => el.price >= minPriceValueOffice && maxPriceValueOffice >= el.price);
-    } else {
+    }
+    if (typeValue == 'apartment') {
         tempFilteredPropPrice = arr.filter((el) => el.price >= minPriceValue && maxPriceValue >= el.price);
+    }
+    if (typeValue == 'house') {
+        tempFilteredPropPrice = arr.filter((el) => el.price >= minPriceValueHouse && maxPriceValueHouse >= el.price);
+    }
+    if (typeValue == 'office') {
+        tempFilteredPropPrice = arr.filter((el) => el.price >= minPriceValueNewOffice && maxPriceValueNewOffice >= el.price);
     }
 
     let filteredPropPrice = filterPropSize(tempFilteredPropPrice);
@@ -362,6 +522,14 @@ function filterPropRegionAndStreet(arr) {
 
             condNew = true;
             optionsComplex = document.getElementById('complex').selectedOptions;
+        }
+        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'house') {
+            optionsRegion = document.querySelectorAll('.region')[2].selectedOptions;
+            optionsStreet = document.querySelectorAll('.street')[2].selectedOptions;
+        }
+        if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'office') {
+            optionsRegion = document.querySelectorAll('.region')[3].selectedOptions;
+            optionsStreet = document.querySelectorAll('.street')[3].selectedOptions;
         }
     }
     let regionValues = Array.from(optionsRegion).map(({ value }) => value);
@@ -550,8 +718,6 @@ function filterPropRegionAndStreet(arr) {
     }
 
 
-
-
     tempFilteredPropRegionAndStreet.forEach(el => {
         const items = document.createElement('li');
         const propItem = document.createElement('a');
@@ -640,6 +806,32 @@ priceNumber.addEventListener('change', runner);
 priceNumber1.addEventListener('change', runner);
 
 
+officePriceNumber.addEventListener('change', runner);
+
+officePriceNumber1.addEventListener('change', runner);
+
+officeSizeNumber.addEventListener('change', runner);
+
+officeSizeNumber1.addEventListener('change', runner);
+
+
+housePriceNumber.addEventListener('change', runner);
+
+housePriceNumber1.addEventListener('change', runner);
+
+houseSizeNumber.addEventListener('change', runner);
+
+houseSizeNumber1.addEventListener('change', runner);
+
+newOfficePriceNumber.addEventListener('change', runner);
+
+newOfficePriceNumber1.addEventListener('change', runner);
+
+newOfficeSizeNumber.addEventListener('change', runner);
+
+newOfficeSizeNumber1.addEventListener('change', runner);
+
+
 
 let parentUl = document.querySelectorAll('.select-wrapper');
 
@@ -681,6 +873,48 @@ let childLi5 = parentUl[4].querySelectorAll('li');
 
 for (let t = 0; t < childLi5.length; t++) {
     childLi5[t].addEventListener('click', () => {
+        runner()
+    });
+}
+let childLi6 = parentUl[5].querySelectorAll('li');
+
+for (let t = 0; t < childLi6.length; t++) {
+    childLi6[t].addEventListener('click', () => {
+        runner()
+    });
+}
+let childLi7 = parentUl[6].querySelectorAll('li');
+
+for (let t = 0; t < childLi7.length; t++) {
+    childLi7[t].addEventListener('click', () => {
+        runner()
+    });
+}
+let childLi8 = parentUl[7].querySelectorAll('li');
+
+for (let t = 0; t < childLi8.length; t++) {
+    childLi8[t].addEventListener('click', () => {
+        runner()
+    });
+}
+let childLi9 = parentUl[8].querySelectorAll('li');
+
+for (let t = 0; t < childLi9.length; t++) {
+    childLi9[t].addEventListener('click', () => {
+        runner()
+    });
+}
+let childLi10 = parentUl[9].querySelectorAll('li');
+
+for (let t = 0; t < childLi10.length; t++) {
+    childLi10[t].addEventListener('click', () => {
+        runner()
+    });
+}
+let childLi11 = parentUl[10].querySelectorAll('li');
+
+for (let t = 0; t < childLi11.length; t++) {
+    childLi11[t].addEventListener('click', () => {
         runner()
     });
 }
