@@ -17,31 +17,36 @@
             <div class="row search__form">
                 <!-- <div class="col s12"></div> -->
                 <div data-tab-component>
-                    <div role="tablist" aria-label="Tabbed content">
+                    <div role="tablist" aria-label="Tabbed content" class="tabs__parent">
                         <button role="tab" aria-selected="true" aria-controls="tab1-content" class="type" id="apartment"
                             data-value="apartment">
-                            Apartment
+                            <i data-feather="layers"></i>
+                            <span>Втоичная</span>
                         </button>
                         <button role="tab" aria-selected="false" aria-controls="tab2-content" class="type"
                             id="new-build" data-value="new">
-                            New
+                            <i data-feather="bar-chart-2"></i>
+                            <span>Новостройки</span>
                         </button>
                         <button role="tab" aria-selected="false" aria-controls="tab3-content" class="type" id="house"
                             data-value="house">
-                            House
+                            <i data-feather="home"></i>
+                            <span>Дома и Участки</span>
                         </button>
 
                         <button role="tab" aria-selected="false" aria-controls="tab4-content" class="type" id="office"
                             data-value="office">
-                            Office
+                            <i data-feather="trello"></i>
+                            <span>Коммерческая</span>
                         </button>
                     </div>
 
                     <section id="tab1-content" role="tabpanel" aria-labelledby="tab1" tabindex="0">
                         <div class="display__grid">
                             <div class="grid__item grid__item-1">
+                                <label>Room</label>
                                 <div class="select__rooms">
-                                    <p>Rooms</p>
+
                                     <button type="button" class="room" id="room1" data-number="1">1</button>
                                     <button type="button" class="room" id="room2" data-number="2">2</button>
                                     <button type="button" class="room" id="room3" data-number="3">3</button>
@@ -102,7 +107,7 @@
                                     <label>Streets</label>
                                 </div>
                             </div>
-                            <div class="grid__item grid__item-6">
+                            <div class="grid__item grid__item-7">
                                 <div class="link__parent">
                                     <span class="link" id="link">Show results</span>
                                 </div>
@@ -113,8 +118,8 @@
                     <section id="tab2-content" role="tabpanel" aria-labelledby="tab2" tabindex="0" aria-hidden="true">
                         <div class="display__grid">
                             <div class="grid__item grid__item-1">
+                                <label>Room</label>
                                 <div class="select__rooms">
-                                    <p>Rooms</p>
                                     <button type="button" class="room" id="room11" data-number="1">1</button>
                                     <button type="button" class="room" id="room22" data-number="2">2</button>
                                     <button type="button" class="room" id="room33" data-number="3">3</button>
@@ -191,7 +196,7 @@
                                     <label>Complex</label>
                                 </div>
                             </div>
-                            <div class="grid__item grid__item-6">
+                            <div class="grid__item grid__item-7">
                                 <div class="link__parent">
                                     <span class="link" id="link">Show results</span>
                                 </div>
@@ -267,7 +272,7 @@
                                     <label>Streets</label>
                                 </div>
                             </div>
-                            <div class="grid__item grid__item-6">
+                            <div class="grid__item grid__item-7">
                                 <div class="link__parent">
                                     <span class="link" id="link">Show results</span>
                                 </div>
@@ -344,7 +349,7 @@
                                     <label>Streets</label>
                                 </div>
                             </div>
-                            <div class="grid__item grid__item-6">
+                            <div class="grid__item grid__item-7">
                                 <div class="link__parent">
                                     <span class="link" id="link">Show results</span>
                                 </div>
@@ -375,7 +380,7 @@
 
 
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.1/nouislider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

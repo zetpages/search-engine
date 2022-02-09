@@ -1,7 +1,6 @@
 let elems = document.querySelectorAll('select');
 let instances = M.FormSelect.init(elems, {});
 
-// const room = document.getElementsByClassName("room");
 const type = document.getElementsByClassName("type");
 
 const list = document.getElementById("list");
@@ -95,7 +94,7 @@ function getRandomIntInclusive(min, max) {
 }
 
 let propers = [];
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 500; i++) {
     propers.push({
         title: '',
         size: getRandomIntInclusive(10, 200),
@@ -104,7 +103,6 @@ for (let i = 0; i < 1000; i++) {
         type: random_item(types),
         region: random_item(regions),
         street: random_item(streets),
-        // complex: random_item(complexes),
         complex: '',
         housetype: '',
         officetype: '',
@@ -413,7 +411,6 @@ function filterPropRooms(arr) {
         }
     });
     let filteredPropRooms = filterPropTypes(tempFilteredPropRooms);
-    console.log(roomsValue);
     return filteredPropRooms;
 }
 
@@ -542,24 +539,18 @@ function filterPropRegionAndStreet(arr) {
     }
     let regionValues = Array.from(optionsRegion).map(({ value }) => value);
     regionValues.shift();
-    console.log(regionValues);
 
     let streetValues = Array.from(optionsStreet).map(({ value }) => value);
     streetValues.shift();
-    console.log(streetValues);
 
     let complexValues = Array.from(optionsComplex).map(({ value }) => value);
     complexValues.shift();
-    console.log(complexValues);
 
     let houseTypeValues = Array.from(optionsHouseType).map(({ value }) => value);
     houseTypeValues.shift();
-    console.log(houseTypeValues);
 
     let officeTypeValues = Array.from(optionsOfficeType).map(({ value }) => value);
     officeTypeValues.shift();
-    console.log(officeTypeValues);
-
 
     let tempFilteredPropRegion = [];
     let tempFilteredPropStreet = [];
@@ -921,7 +912,6 @@ function filterPropRegionAndStreet(arr) {
                             }
                         }
                     });
-                    console.log(tempFilteredPropOfficeType);
                     tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropOfficeType);
                 }
             }
@@ -975,7 +965,6 @@ function filterPropRegionAndStreet(arr) {
                 }
             } else {
                 tempFilteredPropRegionAndStreet = filterPropPrice(propers);
-                console.log("else ======> tempFilteredPropRegionAndStreet = filterPropPrice(propers);");
             }
         }
     }
@@ -1006,7 +995,6 @@ function filterPropRegionAndStreet(arr) {
         items.appendChild(propItem);
         list.appendChild(items);
 
-        // console.log(el.image);
     });
 
     for (let i = 0; i < link.length; i++) {
@@ -1014,7 +1002,6 @@ function filterPropRegionAndStreet(arr) {
         link[i].textContent = `Show ${listLength} results`;
     }
 
-    console.log(tempFilteredPropRegionAndStreet);
     return tempFilteredPropRegionAndStreet;
 }
 
@@ -1028,13 +1015,10 @@ function filterPropRegionAndStreet(arr) {
 
 function runner() {
     return filterPropRegionAndStreet(propers);
-    // return filterPropHouseType(propers);
 }
 
 
-// let parentRooms = document.querySelectorAll('.select__rooms');
 
-// let childRooms = parentRooms[0].querySelectorAll('button');
 
 for (let i = 0; i < childRooms.length; i++) {
     childRooms[i].addEventListener('click', () => {
@@ -1043,7 +1027,6 @@ for (let i = 0; i < childRooms.length; i++) {
     });
 }
 
-// let childRooms1 = parentRooms[1].querySelectorAll('button');
 
 for (let i = 0; i < childRooms1.length; i++) {
     childRooms1[i].addEventListener('click', () => {
@@ -1268,3 +1251,4 @@ function Tabs(args) {
 window.onload = function () {
     let tabs = new Tabs();
 };
+feather.replace();
