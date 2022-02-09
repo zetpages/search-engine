@@ -50,6 +50,8 @@ function random_images(images) {
     return tempImages;
 }
 let types = ['house', 'apartment', 'new', 'office'];
+let houseTypes = ['house', 'townhouse', 'land'];
+let officeTypes = ['office', 'warehouse', 'commercial'];
 let complexes = ['london', 'royal', 'vegas', 'avangard', 'elite'];
 let images = [
     'https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=',
@@ -87,6 +89,8 @@ for (let i = 0; i < 100; i++) {
         street: random_item(streets),
         // complex: random_item(complexes),
         complex: '',
+        housetype: '',
+        officetype: '',
         image: random_images(images),
     });
 }
@@ -94,6 +98,12 @@ for (let i = 0; i < 100; i++) {
 propers.forEach(element => {
     if (element.type == 'new') {
         element.complex = random_item(complexes);
+    }
+    if (element.type == 'house') {
+        element.housetype = random_item(houseTypes);
+    }
+    if (element.type == 'office') {
+        element.officetype = random_item(officeTypes);
     }
 });
 
@@ -334,113 +344,6 @@ function filterPropPrice(arr) {
 
 
 
-// function filterPropRegionAndStreet(arr) {
-
-//     let optionsRegion;
-//     let optionsStreet;
-
-//     for (let i = 0; i < type.length; i++) {
-//         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'apartment') {
-//             optionsRegion = document.querySelectorAll('.region')[0].selectedOptions;
-//             optionsStreet = document.querySelectorAll('.street')[0].selectedOptions;
-//         }
-//         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'new') {
-//             optionsRegion = document.querySelectorAll('.region')[1].selectedOptions;
-//             optionsStreet = document.querySelectorAll('.street')[1].selectedOptions;
-//         }
-//     }
-//     let regionValues = Array.from(optionsRegion).map(({ value }) => value);
-//     regionValues.shift();
-//     console.log(regionValues);
-
-//     let streetValues = Array.from(optionsStreet).map(({ value }) => value);
-//     streetValues.shift();
-//     console.log(streetValues);
-
-//     let tempFilteredPropRegion = [];
-//     let tempFilteredPropStreet = [];
-//     let tempFilteredPropRegionAndStreet = [];
-
-
-//     if (regionValues.length > 0 && streetValues.length > 0) {
-//         let tempoTempo = arr.filter((el) => {
-//             for (let i = 0; i < regionValues.length; i++) {
-//                 if (el.region == regionValues[i]) {
-//                     return true;
-//                 }
-//             }
-//         });
-//         let tempoTempoSorted = tempoTempo.filter((el) => {
-//             for (let i = 0; i < streetValues.length; i++) {
-//                 if (el.street == streetValues[i]) {
-//                     return true;
-//                 }
-//             }
-//         });
-//         tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
-//     } else {
-//         if (regionValues.length > 0 || streetValues.length > 0) {
-//             if (regionValues.length > 0 && streetValues.length == 0) {
-//                 tempFilteredPropRegion = arr.filter((el) => {
-//                     for (let i = 0; i < regionValues.length; i++) {
-//                         if (el.region == regionValues[i]) {
-//                             return true;
-//                         }
-//                     }
-//                 });
-//                 tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropRegion);
-//             }
-//             if (regionValues.length == 0 && streetValues.length > 0) {
-//                 tempFilteredPropStreet = arr.filter((el) => {
-//                     for (let i = 0; i < streetValues.length; i++) {
-//                         if (el.street == streetValues[i]) {
-//                             return true;
-//                         }
-//                     }
-//                 });
-//                 tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropStreet);
-//             }
-//         } else {
-//             tempFilteredPropRegionAndStreet = filterPropPrice(propers);
-//             console.log("else ======> tempFilteredPropRegionAndStreet = filterPropPrice(propers);");
-//         }
-//     }
-
-//     tempFilteredPropRegionAndStreet.forEach(el => {
-//         const items = document.createElement('li');
-//         const propItem = document.createElement('a');
-//         const propInfo = document.createElement('p');
-//         const propImgBox = document.createElement('div');
-
-//         for (let i = 0; i < el.image.length; i++) {
-//             let imgItem = document.createElement('img');
-//             imgItem.src = el.image[i];
-//             propImgBox.appendChild(imgItem);
-//         }
-//         propInfo.textContent = el.title = 'type: ' + el.type + ', ____ rooms: ' + el.rooms + ',  ____ size: ' + el.size + ',  ____ price: ' + el.price + ', ____ region: ' + el.region + ', ____ street: ' + el.street + (el.complex ? `____ complex: ${el.complex}` : '');
-
-
-//         propItem.appendChild(propImgBox);
-//         propItem.appendChild(propInfo);
-//         items.appendChild(propItem);
-//         list.appendChild(items);
-
-//         // console.log(el.image);
-//     });
-
-//     for (let i = 0; i < link.length; i++) {
-//         const listLength = list.children.length;
-//         link[i].textContent = `Show ${listLength} results`;
-//     }
-
-//     console.log(tempFilteredPropRegionAndStreet);
-//     return tempFilteredPropRegionAndStreet;
-// }
-
-
-
-
-
 function filterPropRegionAndStreet(arr) {
 
     let optionsRegion = [];
@@ -660,7 +563,12 @@ function filterPropRegionAndStreet(arr) {
             imgItem.src = el.image[i];
             propImgBox.appendChild(imgItem);
         }
-        propInfo.textContent = el.title = 'type: ' + el.type + ', ____ rooms: ' + el.rooms + ',  ____ size: ' + el.size + ',  ____ price: ' + el.price + ', ____ region: ' + el.region + ', ____ street: ' + el.street + (el.complex ? `____ complex: ${el.complex}` : '');
+        propInfo.textContent = el.title = 'type: ' + el.type + ', |____ rooms: ' +
+            el.rooms + ',  |____ size: ' + el.size + ',  |____ price: ' +
+            el.price + ', |____ region: ' + el.region + ', |____ street: ' +
+            el.street + (el.complex ? `, |____ complex: ${el.complex}` : '') +
+            (el.housetype ? `, |____ housetype: ${el.housetype}` : '') +
+            (el.officetype ? `, |____ officetype: ${el.officetype}` : '');
 
 
         propItem.appendChild(propImgBox);
