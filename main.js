@@ -95,7 +95,7 @@ function getRandomIntInclusive(min, max) {
 }
 
 let propers = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 1000; i++) {
     propers.push({
         title: '',
         size: getRandomIntInclusive(10, 200),
@@ -509,7 +509,9 @@ function filterPropRegionAndStreet(arr) {
     let optionsRegion = [];
     let optionsStreet = [];
     let optionsComplex = [];
+    let optionsHouseType = [];
     let condNew = false;
+    let condHouse = false;
 
     for (let i = 0; i < type.length; i++) {
         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'apartment') {
@@ -526,6 +528,8 @@ function filterPropRegionAndStreet(arr) {
         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'house') {
             optionsRegion = document.querySelectorAll('.region')[2].selectedOptions;
             optionsStreet = document.querySelectorAll('.street')[2].selectedOptions;
+            optionsHouseType = document.getElementById('house-type').selectedOptions;
+            condHouse = true;
         }
         if (type[i].getAttribute('aria-selected') === 'true' && type[i].getAttribute('data-value') == 'office') {
             optionsRegion = document.querySelectorAll('.region')[3].selectedOptions;
@@ -544,10 +548,15 @@ function filterPropRegionAndStreet(arr) {
     complexValues.shift();
     console.log(complexValues);
 
+    let houseTypeValues = Array.from(optionsHouseType).map(({ value }) => value);
+    houseTypeValues.shift();
+    console.log(houseTypeValues);
+
 
     let tempFilteredPropRegion = [];
     let tempFilteredPropStreet = [];
     let tempFilteredPropComplex = [];
+    let tempFilteredPropHouseType = [];
     let tempFilteredPropRegionAndStreet = [];
 
 
@@ -611,7 +620,6 @@ function filterPropRegionAndStreet(arr) {
             tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
         }
         else if (regionValues.length == 0 && streetValues.length > 0 && complexValues.length > 0) {
-            console.log("else if (regionValues.length == 0 && streetValues.length > 0 && complexValues.length > 0) ..........................");
             let tempoTempo = arr.filter((el) => {
                 for (let i = 0; i < streetValues.length; i++) {
                     if (el.street == streetValues[i]) {
@@ -632,7 +640,7 @@ function filterPropRegionAndStreet(arr) {
         else {
             // ----------------------
             if (regionValues.length > 0 || streetValues.length > 0 || complexValues.length > 0) {
-                if (regionValues.length > 0 && streetValues.length == 0 && complexValues == 0) {
+                if (regionValues.length > 0 && streetValues.length == 0 && complexValues.length == 0) {
                     tempFilteredPropRegion = arr.filter((el) => {
                         for (let i = 0; i < regionValues.length; i++) {
                             if (el.region == regionValues[i]) {
@@ -653,7 +661,6 @@ function filterPropRegionAndStreet(arr) {
                     tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropStreet);
                 }
                 if (regionValues.length == 0 && streetValues.length == 0 && complexValues.length > 0) {
-                    console.log(" if (regionValues.length == 0 && streetValues.length == 0 && complexValues.length > 0)");
                     tempFilteredPropComplex = arr.filter((el) => {
                         for (let i = 0; i < complexValues.length; i++) {
                             if (el.complex == complexValues[i]) {
@@ -668,10 +675,130 @@ function filterPropRegionAndStreet(arr) {
             // ---------------
             else {
                 tempFilteredPropRegionAndStreet = filterPropPrice(propers);
-                console.log("else ======> tempFilteredPropRegionAndStreet = filterPropPrice(propers);");
             }
         }
-    } else {
+    }
+    // -----------------------------------------------------------------------------------------------
+    else if (condHouse) {
+        if (regionValues.length > 0 && streetValues.length > 0 && houseTypeValues.length > 0) {
+            let tempoTempo = arr.filter((el) => {
+                for (let i = 0; i < regionValues.length; i++) {
+                    if (el.region == regionValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoSorted = tempoTempo.filter((el) => {
+                for (let i = 0; i < streetValues.length; i++) {
+                    if (el.street == streetValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoTempoSorted = tempoTempoSorted.filter((el) => {
+                for (let i = 0; i < houseTypeValues.length; i++) {
+                    if (el.housetype == houseTypeValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoTempoSorted);
+        }
+        else if (regionValues.length > 0 && streetValues.length > 0 && houseTypeValues.length == 0) {
+            let tempoTempo = arr.filter((el) => {
+                for (let i = 0; i < regionValues.length; i++) {
+                    if (el.region == regionValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoSorted = tempoTempo.filter((el) => {
+                for (let i = 0; i < streetValues.length; i++) {
+                    if (el.street == streetValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
+        }
+        else if (regionValues.length > 0 && streetValues.length == 0 && houseTypeValues.length > 0) {
+            let tempoTempo = arr.filter((el) => {
+                for (let i = 0; i < regionValues.length; i++) {
+                    if (el.region == regionValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoSorted = tempoTempo.filter((el) => {
+                for (let i = 0; i < houseTypeValues.length; i++) {
+                    if (el.housetype == houseTypeValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
+        }
+        else if (regionValues.length == 0 && streetValues.length > 0 && houseTypeValues.length > 0) {
+            let tempoTempo = arr.filter((el) => {
+                for (let i = 0; i < streetValues.length; i++) {
+                    if (el.street == streetValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            let tempoTempoSorted = tempoTempo.filter((el) => {
+                for (let i = 0; i < houseTypeValues.length; i++) {
+                    if (el.housetype == houseTypeValues[i]) {
+                        return true;
+                    }
+                }
+            });
+            tempFilteredPropRegionAndStreet = filterPropPrice(tempoTempoSorted);
+        }
+        // ---------------
+        else {
+            // ----------------------
+            if (regionValues.length > 0 || streetValues.length > 0 || houseTypeValues.length > 0) {
+                if (regionValues.length > 0 && streetValues.length == 0 && houseTypeValues.length == 0) {
+                    tempFilteredPropRegion = arr.filter((el) => {
+                        for (let i = 0; i < regionValues.length; i++) {
+                            if (el.region == regionValues[i]) {
+                                return true;
+                            }
+                        }
+                    });
+                    tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropRegion);
+                }
+                if (regionValues.length == 0 && streetValues.length > 0 && houseTypeValues.length == 0) {
+                    tempFilteredPropStreet = arr.filter((el) => {
+                        for (let i = 0; i < streetValues.length; i++) {
+                            if (el.street == streetValues[i]) {
+                                return true;
+                            }
+                        }
+                    });
+                    tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropStreet);
+                }
+                if (regionValues.length == 0 && streetValues.length == 0 && houseTypeValues.length > 0) {
+                    tempFilteredPropComplex = arr.filter((el) => {
+                        for (let i = 0; i < houseTypeValues.length; i++) {
+                            if (el.housetype == houseTypeValues[i]) {
+                                return true;
+                            }
+                        }
+                    });
+                    console.log(tempFilteredPropComplex);
+                    tempFilteredPropRegionAndStreet = filterPropPrice(tempFilteredPropComplex);
+                }
+            }
+            // ---------------
+            else {
+                tempFilteredPropRegionAndStreet = filterPropPrice(propers);
+            }
+        }
+    }
+    // -----------------------------------------------------------------
+    else {
         if (regionValues.length > 0 && streetValues.length > 0) {
             let tempoTempo = arr.filter((el) => {
                 for (let i = 0; i < regionValues.length; i++) {
@@ -718,6 +845,7 @@ function filterPropRegionAndStreet(arr) {
     }
 
 
+
     tempFilteredPropRegionAndStreet.forEach(el => {
         const items = document.createElement('li');
         const propItem = document.createElement('a');
@@ -762,17 +890,9 @@ function filterPropRegionAndStreet(arr) {
 
 
 
-
-
-
-
-
-
-
-
 function runner() {
     return filterPropRegionAndStreet(propers);
-    // return filterPropComplex(propers);
+    // return filterPropHouseType(propers);
 }
 
 
