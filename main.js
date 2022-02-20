@@ -142,14 +142,14 @@ function storeData() {
 let propsJ = localStorage.getItem('properties');
 let propers = JSON.parse(propsJ);
 
-// if (propers) {
-//     console.log("cool!")
-// } else {
-//     storeData();
-// }
+if (propers) {
+    console.log("cool!")
+} else {
+    storeData();
+}
 
 // console.log(propers)
-localStorage.clear()
+// localStorage.clear()
 // ----------------------------------------
 
 
