@@ -101,7 +101,7 @@ function storeData() {
     }
 
     let propersTempo = [];
-    for (let i = 0; i < 1200; i++) {
+    for (let i = 0; i < 400; i++) {
         propersTempo.push({
             title: '',
             size: getRandomIntInclusive(10, 200),
@@ -142,14 +142,14 @@ function storeData() {
 let propsJ = localStorage.getItem('properties');
 let propers = JSON.parse(propsJ);
 
-if (propers) {
-    console.log("cool!")
-} else {
-    storeData();
-}
+// if (propers) {
+//     console.log("cool!")
+// } else {
+//     storeData();
+// }
 
 // console.log(propers)
-// localStorage.clear()
+localStorage.clear()
 // ----------------------------------------
 
 
