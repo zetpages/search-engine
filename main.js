@@ -1,6 +1,12 @@
 let elems = document.querySelectorAll('select');
 let instances = M.FormSelect.init(elems, {});
 
+// let car = document.querySelectorAll('.carousel');
+// let instance = M.Carousel.init(car, {
+//     fullWidth: true,
+//     indicators: true
+// });
+
 const type = document.getElementsByClassName("type");
 
 const list = document.getElementById("list");
@@ -61,7 +67,7 @@ function storeData() {
     function random_images(images) {
 
         tempImages = [];
-        for (let i = 0; i < getRandomIntInclusive(2, 8); i++) {
+        for (let i = 0; i < getRandomIntInclusive(2, 5); i++) {
             tempImages.push(images[Math.floor(Math.random() * images.length)]);
         }
 
@@ -72,7 +78,6 @@ function storeData() {
     let officeTypes = ['office', 'warehouse', 'commercial'];
     let complexes = ['london', 'royal', 'vegas', 'avangard', 'elite'];
     let images = [
-        'https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=',
         'https://images.unsplash.com/photo-1542144612-1b3641ec3459?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
         'https://images.unsplash.com/photo-1542241647-9cbbada2b309?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
         'https://images.unsplash.com/photo-1542047415514-7d8dde4459f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
@@ -96,7 +101,7 @@ function storeData() {
     }
 
     let propersTempo = [];
-    for (let i = 0; i < 5000; i++) {
+    for (let i = 0; i < 1200; i++) {
         propersTempo.push({
             title: '',
             size: getRandomIntInclusive(10, 200),
@@ -143,7 +148,7 @@ if (propers) {
     storeData();
 }
 
-console.log(propers)
+// console.log(propers)
 // localStorage.clear()
 // ----------------------------------------
 
@@ -993,25 +998,63 @@ function filterPropRegionAndStreet(arr) {
 
     tempFilteredPropRegionAndStreet.forEach(el => {
         const items = document.createElement('li');
+        items.classList.add('prop__list');
+
         const propItem = document.createElement('a');
-        const propInfo = document.createElement('p');
+        propItem.classList.add('prop__item');
+
+        const propInfoBlock = document.createElement('div');
+        propInfoBlock.className = 'prop__info';
+
         const propImgBox = document.createElement('div');
+        propImgBox.classList.add('carousel');
+        propImgBox.classList.add('carousel-slider');
+
+        const strongTitle = document.createElement('p');
+        strongTitle.className = 'prop__title';
+
+        const strongPrice = document.createElement('p');
+        strongPrice.className = 'prop__price';
+
+        const addressText = document.createElement('p');
+        addressText.className = 'prop__address';
+
+        const extraText = document.createElement('p');
+        extraText.className = 'prop__extra';
+
+        let hLinks = ['#one!', '#two!', '#three!', '#four!', '#five!', '#six!', '#seven!', '#eight!'];
 
         for (let i = 0; i < el.image.length; i++) {
+            const propImgBoxItem = document.createElement('a');
+            propImgBoxItem.classList.add('carousel-item');
+            propImgBoxItem.href = hLinks[i];
             let imgItem = document.createElement('img');
             imgItem.src = el.image[i];
-            propImgBox.appendChild(imgItem);
+            propImgBox.appendChild(propImgBoxItem);
+            propImgBoxItem.appendChild(imgItem);
         }
-        propInfo.textContent = el.title = 'type: ' + el.type + ', |____ rooms: ' +
-            el.rooms + ',  |____ size: ' + el.size + ',  |____ price: ' +
-            el.price + ', |____ region: ' + el.region + ', |____ street: ' +
-            el.street + (el.complex ? `, |____ complex: ${el.complex}` : '') +
-            (el.housetype ? `, |____ housetype: ${el.housetype}` : '') +
-            (el.officetype ? `, |____ officetype: ${el.officetype}` : '');
+
+        strongPrice.textContent = el.price + ' $';
+        strongTitle.textContent = el.rooms + ' комнатная ' + el.type + ' | ' + el.size + ' м.кв';
+        addressText.textContent = 'Район: ' + el.region + ' | Улица: ' + el.street;
+        extraText.textContent = (el.complex ? `Жилой комплекс: ${el.complex}` : '') +
+            (el.housetype ? `Тип: ${el.housetype}` : '') +
+            (el.officetype ? `Тип: ${el.officetype}` : '');
+
+        // propInfoBlock.textContent = el.title = 'type: ' + el.type + ', |____ rooms: ' +
+        //     el.rooms + ',  |____ size: ' + el.size + ',  |____ price: ' +
+        //     el.price + ', |____ region: ' + el.region + ', |____ street: ' +
+        //     el.street + (el.complex ? `, |____ complex: ${el.complex}` : '') +
+        //     (el.housetype ? `, |____ housetype: ${el.housetype}` : '') +
+        //     (el.officetype ? `, |____ officetype: ${el.officetype}` : '');
 
 
+        propInfoBlock.appendChild(strongTitle);
+        propInfoBlock.appendChild(strongPrice);
+        propInfoBlock.appendChild(addressText);
+        propInfoBlock.appendChild(extraText);
         propItem.appendChild(propImgBox);
-        propItem.appendChild(propInfo);
+        propItem.appendChild(propInfoBlock);
         items.appendChild(propItem);
         list.appendChild(items);
 
@@ -1021,6 +1064,12 @@ function filterPropRegionAndStreet(arr) {
         const listLength = list.children.length;
         link[i].textContent = `Show ${listLength} results`;
     }
+
+    let car = document.querySelectorAll('.carousel');
+    let instance = M.Carousel.init(car, {
+        fullWidth: true,
+        indicators: true
+    });
 
     return tempFilteredPropRegionAndStreet;
 }
@@ -1035,6 +1084,7 @@ function filterPropRegionAndStreet(arr) {
 
 function runner() {
     return filterPropRegionAndStreet(propers);
+
 }
 
 
@@ -1272,3 +1322,4 @@ window.onload = function () {
     let tabs = new Tabs();
 };
 feather.replace();
+
