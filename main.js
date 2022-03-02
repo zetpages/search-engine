@@ -57,96 +57,94 @@ let childRooms1 = parentRooms[1].querySelectorAll('button');
 // generating random property key values start!
 
 
-function storeData() {
-    function random_item(types) {
+function random_item(types) {
 
-        return types[Math.floor(Math.random() * types.length)];
+    return types[Math.floor(Math.random() * types.length)];
 
+}
+
+function random_images(images) {
+
+    tempImages = [];
+    for (let i = 0; i < getRandomIntInclusive(2, 5); i++) {
+        tempImages.push(images[Math.floor(Math.random() * images.length)]);
     }
 
-    function random_images(images) {
+    return tempImages;
+}
+let types = ['house', 'apartment', 'new', 'office'];
+let houseTypes = ['house', 'townhouse', 'land'];
+let officeTypes = ['office', 'warehouse', 'commercial'];
+let complexes = ['london', 'royal', 'vegas', 'avangard', 'elite'];
+let images = [
+    'https://images.unsplash.com/photo-1542144612-1b3641ec3459?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1542241647-9cbbada2b309?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1542047415514-7d8dde4459f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1542553458-79a13aebfda6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1548103662-ddcb912e3fe3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NnwxMjI0MjgyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1604804221869-d4e1a8f27ed8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHwxMjI0MjgyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1605087610901-fe3ed05fc126?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8M3wxMjI0MjgyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1584713503693-bb386ec95cf2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dXJsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1584714268709-c3dd9c92b378?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dXJsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1605114081604-43bd388fe429?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXxXQ0xnMWV3dl9FSXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60'
+];
 
-        tempImages = [];
-        for (let i = 0; i < getRandomIntInclusive(2, 5); i++) {
-            tempImages.push(images[Math.floor(Math.random() * images.length)]);
-        }
-
-        return tempImages;
-    }
-    let types = ['house', 'apartment', 'new', 'office'];
-    let houseTypes = ['house', 'townhouse', 'land'];
-    let officeTypes = ['office', 'warehouse', 'commercial'];
-    let complexes = ['london', 'royal', 'vegas', 'avangard', 'elite'];
-    let images = [
-        'https://images.unsplash.com/photo-1542144612-1b3641ec3459?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
-        'https://images.unsplash.com/photo-1542241647-9cbbada2b309?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
-        'https://images.unsplash.com/photo-1542047415514-7d8dde4459f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
-        'https://images.unsplash.com/photo-1542553458-79a13aebfda6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-        'https://images.unsplash.com/photo-1548103662-ddcb912e3fe3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NnwxMjI0MjgyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-        'https://images.unsplash.com/photo-1604804221869-d4e1a8f27ed8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NHwxMjI0MjgyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-        'https://images.unsplash.com/photo-1605087610901-fe3ed05fc126?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8M3wxMjI0MjgyN3x8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-        'https://images.unsplash.com/photo-1584713503693-bb386ec95cf2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dXJsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-        'https://images.unsplash.com/photo-1584714268709-c3dd9c92b378?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dXJsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-        'https://images.unsplash.com/photo-1605114081604-43bd388fe429?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXxXQ0xnMWV3dl9FSXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60'
-    ];
-
-    let regions = ['alamedin', 'belovodskoe', 'dachnoe', 'ivanovka', 'kant', 'kok-jar', 'lebedinovka', 'leninski', 'oktabyrski', 'pervomaiski'];
-    let streets = ['12 microdistrict', '11 microdistrict', '10 microdistrict', '9 microdistrict', '8 microdistrict', '7 microdistrict', '6 microdistrict', '5 microdistrict', '4 microdistrict', 'abdymomunova'];
+let regions = ['alamedin', 'belovodskoe', 'dachnoe', 'ivanovka', 'kant', 'kok-jar', 'lebedinovka', 'leninski', 'oktabyrski', 'pervomaiski'];
+let streets = ['12 microdistrict', '11 microdistrict', '10 microdistrict', '9 microdistrict', '8 microdistrict', '7 microdistrict', '6 microdistrict', '5 microdistrict', '4 microdistrict', 'abdymomunova'];
 
 
-    function getRandomIntInclusive(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-    let propersTempo = [];
-    for (let i = 0; i < 400; i++) {
-        propersTempo.push({
-            title: '',
-            size: getRandomIntInclusive(10, 200),
-            price: getRandomIntInclusive(20000, 200000),
-            rooms: getRandomIntInclusive(1, 5),
-            type: random_item(types),
-            region: random_item(regions),
-            street: random_item(streets),
-            complex: '',
-            housetype: '',
-            officetype: '',
-            image: random_images(images),
-        });
-    }
-
-    propersTempo.forEach(element => {
-        if (element.type == 'new') {
-            element.complex = random_item(complexes);
-        }
-        if (element.type == 'house') {
-            element.housetype = random_item(houseTypes);
-        }
-        if (element.type == 'office') {
-            element.officetype = random_item(officeTypes);
-        }
+let propers = [];
+for (let i = 0; i < 800; i++) {
+    propers.push({
+        title: '',
+        size: getRandomIntInclusive(10, 200),
+        price: getRandomIntInclusive(20000, 200000),
+        rooms: getRandomIntInclusive(1, 5),
+        type: random_item(types),
+        region: random_item(regions),
+        street: random_item(streets),
+        complex: '',
+        housetype: '',
+        officetype: '',
+        image: random_images(images),
     });
-
-
-    let propersJson = JSON.stringify(propersTempo);
-    localStorage.setItem('properties', propersJson);
-
-
-    // generating random property key values end!
 }
 
+propers.forEach(element => {
+    if (element.type == 'new') {
+        element.complex = random_item(complexes);
+    }
+    if (element.type == 'house') {
+        element.housetype = random_item(houseTypes);
+    }
+    if (element.type == 'office') {
+        element.officetype = random_item(officeTypes);
+    }
+});
 
 
-let propsJ = localStorage.getItem('properties');
-let propers = JSON.parse(propsJ);
+// let propersJson = JSON.stringify(propersTempo);
+// localStorage.setItem('properties', propersJson);
 
-if (propers) {
-    console.log("cool!")
-} else {
-    storeData();
-}
+
+// generating random property key values end!
+
+
+
+// let propsJ = localStorage.getItem('properties');
+// let propers = JSON.parse(propsJ);
+
+// if (propers) {
+//     console.log("cool!")
+// } else {
+//     storeData();
+// }
 
 // console.log(propers)
 // localStorage.clear()
